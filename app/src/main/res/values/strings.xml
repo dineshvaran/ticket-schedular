@@ -1,0 +1,44 @@
+<resources>
+    <string name="application_name">Ticket Schedular</string>
+
+
+    <!--common-->
+    <string name="date_spliter">.</string>
+
+    <!--main activity-->
+    <string name="booking_open_desc">Booking opens on %1$s</string>
+    <string name="empty_message">Oops! No Data</string>
+    <string name="empty_ticket_description">Error occured! Description is empty.</string>
+
+    <!--add activity-->
+    <string name="from_station">From</string>
+    <string name="to_station">To</string>
+    <string name="alarm_radio_item">Alarm</string>
+    <string name="add_to_calendar_item">Add to Google Calendar</string>
+    <string name="alarm_button">Select Time</string>
+    <string name="add_to_google_calendar_button">Add to Calendar</string>
+    <string name="select_alarm_type_text">Select Reminder Type</string>
+
+
+    <!--action bar strings-->
+    <string name="action_add">Add</string>
+    <string name="ticket_detail">Ticket Description</string>
+    <string name="date_of_journey">Select Journey Date</string>
+
+
+    <!--Toast Messages-->
+    <!--Info-->
+    <string name="toast_google_calender_info">Click Save to Add to Google Calendar</string>
+    <string name="toast_select_journey_date">Select Journey Date</string>
+    <string name="toast_success_message">You will be reminded when ticket opens.</string>
+    <!--Error-->
+    <string name="toast_enter_description">Enter Description</string>
+    <string name="toast_enter_from_station">Enter From Location</string>
+    <string name="toast_enter_to_station">Enter To Location</string>
+
+
+    <!--notification-->
+    <string name="channel_default">High</string>
+
+
+</resources>

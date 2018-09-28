@@ -6,9 +6,7 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.arch.persistence.room.Room;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.v7.app.AppCompatActivity;
@@ -21,24 +19,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
-import varanz.android.application.irctcticketreminder.adapter.RecyclerViewAdapter;
 import varanz.android.application.irctcticketreminder.receiver.AlarmReceiver;
 import varanz.android.application.irctcticketreminder.store.TicketSchedularDataBase;
 import varanz.android.application.irctcticketreminder.store.TicketSchedularEntity;
@@ -65,7 +57,7 @@ public class AddActivity extends AppCompatActivity {
     /**
      * Views in this activity
      */
-    private TextView selectedDate;
+//    private TextView selectedDate;
     private TextView bookingDate;
     private TextView bookingMonth;
     private TextView bookingYear;
@@ -140,8 +132,15 @@ public class AddActivity extends AppCompatActivity {
                         .setData(CalendarContract.Events.CONTENT_URI)
                         .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
                         .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                        .putExtra(CalendarContract.Events.TITLE,
-                                "TicketSchedular -- " + "Booking opens today for the date" + selectedDate.getText().toString())
+
+//                        .putExtra(CalendarContract.Events.TITLE,
+//                                "TicketSchedular -- " + "Booking opens" + selectedDate.getText().toString())
+
+                        // added instead of selectedDate TODO temorary fix
+                        .putExtra(CalendarContract.Events.TITLE, "TicketSchedular -- " + "Booking opens")
+
+
+
                         .putExtra(CalendarContract.Events.DESCRIPTION, "Book ticket from " + fromStation.getText().toString()
                             + " to " + toStation.getText().toString())
                         .putExtra(CalendarContract.Events.EVENT_LOCATION, "www.irctc.co.in")
@@ -214,7 +213,7 @@ public class AddActivity extends AppCompatActivity {
      * Initializes the Views in this activity
      */
     private void initializeViewObjects() {
-        selectedDate = findViewById(R.id.selected_date_value);
+//        selectedDate = findViewById(R.id.selected_date_value);
         bookingDate = findViewById(R.id.booking_date);
         bookingMonth = findViewById(R.id.booking_month);
         bookingYear = findViewById(R.id.booking_year);
@@ -309,7 +308,6 @@ public class AddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int itemId = alarmRadioGroup.getCheckedRadioButtonId();
                 RadioButton item = findViewById(itemId);
-                String selectedDate = AddActivity.this.selectedDate.getText().toString();
 
                 //TODO remove text from condition, add value for radio item and use it in condition statement
                 if(item.getText().toString().equals(getString(R.string.alarm_radio_item)) && sdate!=0){
@@ -391,6 +389,7 @@ public class AddActivity extends AppCompatActivity {
      * Action to be done on selecting date
      */
     DatePickerDialog.OnDateSetListener date_listener = new DatePickerDialog.OnDateSetListener() {
+
         @Override
         public void onDateSet(DatePicker view, int year, int month, int day) {
 
@@ -399,10 +398,17 @@ public class AddActivity extends AppCompatActivity {
             smonth=month;
             syear=year;
 
+            SimpleDateFormat format = new SimpleDateFormat("EE");
+            String weekDay="";
+
             // calculating booking date
             Calendar calendar = Calendar.getInstance();
             calendar.set(year, month, day);
+            weekDay=format.format(calendar.getTime());
             calendar.add(Calendar.DATE, -120);
+
+            datePickerButton.setText(day + getString(R.string.dateSeparator) +
+                    month + getString(R.string.dateSeparator) + year + "        " + weekDay);
 
             // updating booking date
             bdate=calendar.get(Calendar.DATE);
@@ -424,7 +430,7 @@ public class AddActivity extends AppCompatActivity {
         public void onTimeSet(TimePicker view, int hour, int minute) {
 
             long remindTime = getReminderinMillis(sdate, smonth, syear,hour, minute);
-            selectedTime.setText(hour + getString(R.string.date_spliter) + minute);
+            selectedTime.setText(hour + getString(R.string.timeSeparator) + minute);
             alarmTime = remindTime;
         }
     };

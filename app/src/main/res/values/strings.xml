@@ -3,7 +3,8 @@
 
 
     <!--common-->
-    <string name="date_spliter">.</string>
+    <string name="dateSeparator">/ </string>
+    <string name="timeSeparator">: </string>
 
     <!--main activity-->
     <string name="booking_open_desc">Booking opens on %1$s</string>

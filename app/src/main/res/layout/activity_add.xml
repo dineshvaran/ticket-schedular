@@ -60,49 +60,53 @@
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/from_station" />
 
-    <TextView
-        android:id="@+id/date_of_journey"
-        android:layout_width="151dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="date"
-        android:text="@string/date_of_journey"
-        android:textAlignment="center"
-        android:textColor="@android:color/background_dark"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/from_station" />
+    <!--<TextView-->
+        <!--android:id="@+id/date_of_journey"-->
+        <!--android:layout_width="151dp"-->
+        <!--android:layout_height="46dp"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:ems="10"-->
+        <!--android:gravity="center"-->
+        <!--android:inputType="date"-->
+        <!--android:text="@string/date_of_journey"-->
+        <!--android:textAlignment="center"-->
+        <!--android:textColor="@android:color/background_dark"-->
+        <!--android:textSize="16sp"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/from_station" />-->
 
     <Button
         android:id="@+id/date_picker"
-        android:layout_width="54dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="8dp"
-        android:drawableStart="@android:drawable/ic_menu_my_calendar"
-        app:layout_constraintStart_toEndOf="@+id/date_of_journey"
-        app:layout_constraintTop_toTopOf="@+id/date_of_journey" />
-
-    <TextView
-        android:id="@+id/selected_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="?android:attr/spinnerStyle"
+        android:layout_width="210dp"
+        android:layout_height="54dp"
         android:layout_marginStart="16dp"
-        android:text="Selected Date"
-        app:layout_constraintStart_toEndOf="@+id/date_picker"
-        app:layout_constraintTop_toTopOf="@+id/date_of_journey" />
+        android:layout_marginTop="8dp"
+        android:drawableStart="@android:drawable/ic_menu_my_calendar"
+        android:text="Journey Date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/from_station" />
 
-    <TextView
-        android:id="@+id/selected_date_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="4dp"
-        android:text="--.--.----"
-        app:layout_constraintStart_toEndOf="@+id/date_picker"
-        app:layout_constraintTop_toBottomOf="@+id/selected_date" />
+    <!--<TextView-->
+        <!--android:id="@+id/selected_date"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:text="Selected Date"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/date_picker"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/date_picker" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/selected_date_value"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="24dp"-->
+        <!--android:layout_marginTop="4dp"-->
+        <!--android:text="&#45;&#45;.&#45;&#45;.&#45;&#45;&#45;&#45;"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/date_picker"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/selected_date" />-->
 
     <!--<Switch-->
         <!--android:id="@+id/alarm_switch"-->
@@ -181,14 +185,14 @@
         android:layout_width="155dp"
         android:layout_height="39dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:gravity="bottom"
         android:text="@string/select_alarm_type_text"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_of_journey" />
+        app:layout_constraintTop_toBottomOf="@+id/date_picker" />
 
 
     <View
@@ -259,6 +263,5 @@
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/selected_time_text"
         app:layout_constraintTop_toBottomOf="@+id/selected_time_text" />
-
 
 </android.support.constraint.ConstraintLayout>

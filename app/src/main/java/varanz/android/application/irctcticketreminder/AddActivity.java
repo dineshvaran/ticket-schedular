@@ -6,12 +6,12 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.arch.persistence.room.Room;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.support.design.card.MaterialCardView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -21,24 +21,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
-import varanz.android.application.irctcticketreminder.adapter.RecyclerViewAdapter;
 import varanz.android.application.irctcticketreminder.receiver.AlarmReceiver;
 import varanz.android.application.irctcticketreminder.store.TicketSchedularDataBase;
 import varanz.android.application.irctcticketreminder.store.TicketSchedularEntity;
@@ -65,20 +60,14 @@ public class AddActivity extends AppCompatActivity {
     /**
      * Views in this activity
      */
-    private TextView selectedDate;
-    private TextView bookingDate;
-    private TextView bookingMonth;
-    private TextView bookingYear;
-    private TextView selectedTime;
     private Button datePickerButton;
     private EditText ticketDescription;
     private EditText fromStation;
     private EditText toStation;
-    private RadioButton alarmItem;
-    private RadioButton gcalendarItem;
-    private Button reminderActionButton;
+    private Button timePickerButton;
     private RadioGroup alarmRadioGroup;
-    private TextView selectedTimeText;
+    private MaterialCardView materialCardView;
+    private TextView bookingDateText;
 
     /**
      * used to handle the active ticket
@@ -116,47 +105,56 @@ public class AddActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(validateInputs()){
+        if(validateInputs()) {
 
-            int radioItemId = alarmRadioGroup.getCheckedRadioButtonId();
-            RadioButton radioItem = findViewById(radioItemId);
+            if (validateSelectedDate() && validateBookingDate()) {
+                int radioItemId = alarmRadioGroup.getCheckedRadioButtonId();
+                RadioButton radioItem = findViewById(radioItemId);
 
-            if(radioItem.getText().toString().equals(getString(R.string.alarm_radio_item))){
+                if (radioItem.getText().toString().equals(getString(R.string.alarm_radio_item))) {
 
-                saveData(getString(R.string.alarm_radio_item));
-                setAlarm(alarmTime);
-                Toast.makeText(this, getString(R.string.toast_success_message), Toast.LENGTH_SHORT).show();
-                finish();
+                    saveData(getString(R.string.alarm_radio_item));
+                    setAlarm(alarmTime);
+                    Toast.makeText(this, getString(R.string.toast_success_message), Toast.LENGTH_SHORT).show();
+                    finish();
 
-            }else{
+                } else {
 
-                Calendar beginTime = Calendar.getInstance();
-                beginTime.set(byear, bmonth, bdate,8, 00);
+                    Calendar beginTime = Calendar.getInstance();
+                    beginTime.set(byear, bmonth, bdate, 8, 0);
 
-                Calendar endTime = Calendar.getInstance();
-                endTime.set(byear, bmonth, bdate,8, 30);
+                    Calendar endTime = Calendar.getInstance();
+                    endTime.set(byear, bmonth, bdate, 8, 30);
 
-                Intent intent = new Intent(Intent.ACTION_INSERT)
-                        .setData(CalendarContract.Events.CONTENT_URI)
-                        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
-                        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                        .putExtra(CalendarContract.Events.TITLE,
-                                "TicketSchedular -- " + "Booking opens today for the date" + selectedDate.getText().toString())
-                        .putExtra(CalendarContract.Events.DESCRIPTION, "Book ticket from " + fromStation.getText().toString()
-                            + " to " + toStation.getText().toString())
-                        .putExtra(CalendarContract.Events.EVENT_LOCATION, "www.irctc.co.in")
-                        .putExtra(Intent.EXTRA_EMAIL, "algebra.app.help@gmail.com");
+                    Intent intent = new Intent(Intent.ACTION_INSERT)
+                            .setData(CalendarContract.Events.CONTENT_URI)
+                            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+                            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
 
-                startActivity(intent);
+                            // added instead of selectedDate TODO temorary fix
+                            .putExtra(CalendarContract.Events.TITLE, "TicketSchedular -- " + "Booking opens")
+
+
+                            .putExtra(CalendarContract.Events.DESCRIPTION, "Book ticket from " + fromStation.getText().toString()
+                                    + " to " + toStation.getText().toString())
+                            .putExtra(CalendarContract.Events.EVENT_LOCATION, "www.irctc.co.in")
+                            .putExtra(Intent.EXTRA_EMAIL, "algebra.app.help@gmail.com");
+
+                    startActivity(intent);
+                }
+
+            } else {
+                Toast.makeText(this, getString(R.string.dateError), Toast.LENGTH_LONG).show();
             }
-
         }
+
+
         return super.onOptionsItemSelected(item);
     }
 
     /**
      * Updates the empty ticket in Database
-     * @param reminderType
+     * @param reminderType enum ReminderType
      */
     public void saveData(String reminderType){
 
@@ -214,53 +212,66 @@ public class AddActivity extends AppCompatActivity {
      * Initializes the Views in this activity
      */
     private void initializeViewObjects() {
-        selectedDate = findViewById(R.id.selected_date_value);
-        bookingDate = findViewById(R.id.booking_date);
-        bookingMonth = findViewById(R.id.booking_month);
-        bookingYear = findViewById(R.id.booking_year);
         datePickerButton = findViewById(R.id.date_picker);
         ticketDescription = findViewById(R.id.ticket_description);
-        selectedTime = findViewById(R.id.selected_time);
         fromStation = findViewById(R.id.from_station);
         toStation= findViewById(R.id.to_station);
-        alarmItem= findViewById(R.id.alarm_radio_button);
-        gcalendarItem= findViewById(R.id.add_to_calendar_radio_button);
-        reminderActionButton = findViewById(R.id.reminder_action);
+        timePickerButton = findViewById(R.id.time_picker_button);
         alarmRadioGroup= findViewById(R.id.alarm_type);
-        selectedTimeText= findViewById(R.id.selected_time_text);
+        materialCardView=findViewById(R.id.material_card_view);
+        bookingDateText=findViewById(R.id.booking_date_text);
     }
 
     /**
      * Validates the user Input
-     * @return
+     * @return boolean
      */
     private boolean validateInputs(){
-        Boolean validationSuccess = false;
         if(TextUtils.isEmpty(ticketDescription.getText())){
             ticketDescription.setError(getString(R.string.toast_enter_description));
-            validationSuccess = false;
+            return false;
         }else{
             ticketDescription.setError(null);
-            validationSuccess=true;
         }
 
         if(TextUtils.isEmpty(fromStation.getText())){
             fromStation.setError(getString(R.string.toast_enter_from_station));
-            validationSuccess = false;
+            return false;
         }else{
             fromStation.setError(null);
-            validationSuccess=true;
         }
 
         if(TextUtils.isEmpty(toStation.getText())){
             toStation.setError(getString(R.string.toast_enter_to_station));
-            validationSuccess = false;
+            return false;
         }else{
             toStation.setError(null);
-            validationSuccess=true;
         }
 
-        return validationSuccess;
+        return true;
+    }
+
+    /**
+     * validates whether selected date is less than the present date
+     * @return boolean
+     */
+    private boolean validateSelectedDate(){
+        Calendar today = Calendar.getInstance();
+        Calendar selectedDate = Calendar.getInstance();
+        selectedDate.set(syear,smonth,sdate);
+        return selectedDate.getTime().after(today.getTime());
+
+    }
+
+    /**
+     * validates whether booking date is less than the present date
+     * @return boolean
+     */
+    private boolean validateBookingDate(){
+        Calendar today = Calendar.getInstance();
+        Calendar bookingDate = Calendar.getInstance();
+        bookingDate.set(byear,bmonth,bdate);
+        return bookingDate.getTime().after(today.getTime());
     }
 
     /**
@@ -280,67 +291,40 @@ public class AddActivity extends AppCompatActivity {
                     view = new View(AddActivity.this);
                 }
 
-                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                if (inputMethodManager != null) {
+                    inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
                 showDialog("datePicker").show();
             }
         });
 
-        alarmItem.setOnClickListener(new View.OnClickListener() {
+        timePickerButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                reminderActionButton.setVisibility(View.VISIBLE);
-                selectedTime.setVisibility(View.VISIBLE);
-                selectedTimeText.setVisibility(View.VISIBLE);
-            }
-        });
-
-        gcalendarItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                reminderActionButton.setVisibility(View.GONE);
-                selectedTime.setVisibility(View.GONE);
-                selectedTimeText.setVisibility(View.GONE);
-                Toast.makeText(AddActivity.this, getString(R.string.toast_google_calender_info), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        reminderActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int itemId = alarmRadioGroup.getCheckedRadioButtonId();
-                RadioButton item = findViewById(itemId);
-                String selectedDate = AddActivity.this.selectedDate.getText().toString();
-
-                //TODO remove text from condition, add value for radio item and use it in condition statement
-                if(item.getText().toString().equals(getString(R.string.alarm_radio_item)) && sdate!=0){
                         showDialog("timePicker").show();
-                }else{
-                    Toast.makeText(AddActivity.this, getString(R.string.toast_select_journey_date),
-                            Toast.LENGTH_LONG).show();
-                }
             }
         });
     }
 
     /**
      * Returns the Calendar Object in Milli Seconds
-     * @param date
-     * @param month
-     * @param year
-     * @param hour
-     * @param minute
-     * @return
+     * @param date month date
+     * @param month month
+     * @param year year
+     * @param hour hour
+     * @param minute minute
+     * @return long
      */
     public long getReminderinMillis(int date, int month, int year, int hour, int minute){
         Calendar calendar = Calendar.getInstance();
-        Calendar present = Calendar.getInstance();
         calendar.set(year, month, date, hour, minute, 0);
         return calendar.getTimeInMillis();
     }
 
     /**
      * Activates the Media service on the given time
-     * @param remindTime
+     * @param remindTime when to remind in millis
      */
     public void setAlarm(long remindTime) {
         Log.d(className, "setAlarm method start");
@@ -352,17 +336,19 @@ public class AddActivity extends AppCompatActivity {
 
         PendingIntent pendingAlarmIntent = PendingIntent.getBroadcast(getApplicationContext(),
                 new Random().nextInt(1000), alarmIntent, 0);
-        AlarmManager alarmManager = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, remindTime,
-                alarmManager.INTERVAL_DAY, pendingAlarmIntent);
+        AlarmManager alarmManager = (AlarmManager) this.getSystemService(AddActivity.ALARM_SERVICE);
+        if (alarmManager != null) {
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, remindTime,
+                    AlarmManager.INTERVAL_DAY, pendingAlarmIntent);
+        }
         Toast.makeText(this, "You will be reminded when booking opens.", Toast.LENGTH_LONG).show();
         Log.d(className, "setAlarm method end");
     }
 
     /**
      * Shows date picker or time picker dialog based on the parameter value.
-     * @param dialogToShow
-     * @return
+     * @param dialogToShow datePicker or timePicker
+     * @return Dialag
      */
     // TODO use int instead of string, if predetermined values, use enum
     private Dialog showDialog(String dialogToShow) {
@@ -391,28 +377,28 @@ public class AddActivity extends AppCompatActivity {
      * Action to be done on selecting date
      */
     DatePickerDialog.OnDateSetListener date_listener = new DatePickerDialog.OnDateSetListener() {
+
         @Override
         public void onDateSet(DatePicker view, int year, int month, int day) {
-
            // updating journey date
             sdate=day;
             smonth=month;
             syear=year;
-
+            SimpleDateFormat format = new SimpleDateFormat("EEEE", Locale.US);
+            SimpleDateFormat formatB = new SimpleDateFormat("dd MMMM yyyy", Locale.US);
             // calculating booking date
             Calendar calendar = Calendar.getInstance();
             calendar.set(year, month, day);
+            String weekDay=format.format(calendar.getTime());
             calendar.add(Calendar.DATE, -120);
-
             // updating booking date
             bdate=calendar.get(Calendar.DATE);
             bmonth=calendar.get(Calendar.MONTH);
             byear=calendar.get(Calendar.YEAR);
 
-            bookingDate.setText(String.valueOf(bdate));
-            bookingMonth.setText(String.valueOf(bmonth + 1));
-            bookingYear.setText(String.valueOf(byear));
-
+            materialCardView.setVisibility(View.VISIBLE);
+            bookingDateText.setText(formatB.format(calendar.getTime()));
+            datePickerButton.setText(String.format(getString(R.string.selectedDateFormat), day, (month+1), year, weekDay));
         }
     };
 
@@ -424,7 +410,7 @@ public class AddActivity extends AppCompatActivity {
         public void onTimeSet(TimePicker view, int hour, int minute) {
 
             long remindTime = getReminderinMillis(sdate, smonth, syear,hour, minute);
-            selectedTime.setText(hour + getString(R.string.date_spliter) + minute);
+            timePickerButton.setText(String.format(getString(R.string.selectedTimeFormat), hour, minute));
             alarmTime = remindTime;
         }
     };

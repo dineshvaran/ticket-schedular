@@ -5,14 +5,14 @@
     android:id="@+id/constraint_add"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="16sp"
+    android:paddingRight="16sp"
     tools:context=".AddActivity">
 
     <EditText
         android:id="@+id/ticket_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/ticket_detail"
@@ -23,14 +23,15 @@
 
     <EditText
         android:id="@+id/from_station"
-        android:layout_width="151dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="@string/from_station"
         android:inputType="textPersonName"
         android:singleLine="true"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ticket_description" />
 
@@ -48,9 +49,8 @@
 
     <EditText
         android:id="@+id/to_station"
-        android:layout_width="132dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
         android:ems="10"
         android:hint="@string/to_station"
@@ -60,142 +60,39 @@
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/from_station" />
 
-    <TextView
-        android:id="@+id/date_of_journey"
-        android:layout_width="151dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="date"
-        android:text="@string/date_of_journey"
-        android:textAlignment="center"
-        android:textColor="@android:color/background_dark"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/from_station" />
-
     <Button
         android:id="@+id/date_picker"
-        android:layout_width="54dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="8dp"
-        android:drawableStart="@android:drawable/ic_menu_my_calendar"
-        app:layout_constraintStart_toEndOf="@+id/date_of_journey"
-        app:layout_constraintTop_toTopOf="@+id/date_of_journey" />
-
-    <TextView
-        android:id="@+id/selected_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="?android:attr/spinnerStyle"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
         android:layout_marginStart="16dp"
-        android:text="Selected Date"
-        app:layout_constraintStart_toEndOf="@+id/date_picker"
-        app:layout_constraintTop_toTopOf="@+id/date_of_journey" />
-
-    <TextView
-        android:id="@+id/selected_date_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
-        android:text="--.--.----"
-        app:layout_constraintStart_toEndOf="@+id/date_picker"
-        app:layout_constraintTop_toBottomOf="@+id/selected_date" />
-
-    <!--<Switch-->
-        <!--android:id="@+id/alarm_switch"-->
-        <!--android:layout_width="195dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:layout_marginTop="320dp"-->
-        <!--android:switchMinWidth="20dp"-->
-        <!--android:switchPadding="75dp"-->
-        <!--android:text="Add Reminder"-->
-        <!--android:textAlignment="textStart"-->
-        <!--android:textSize="16sp"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/date_of_journey"-->
-        <!--tools:checked="true" />-->
-
-    <TextView
-        android:id="@+id/booking_open_text"
-        android:layout_width="231dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:text="Ticket Opens On (d/m/yy)"
-        android:textAlignment="textStart"
-        android:textColor="@android:color/background_dark"
-        android:textSize="16sp"
+        android:layout_marginEnd="16dp"
+        android:drawableStart="@android:drawable/ic_menu_my_calendar"
+        android:text="@string/journeyDate"
+        app:layout_constraintEnd_toStartOf="@+id/time_picker_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reminder_action" />
-
-    <TextView
-        android:id="@+id/booking_date"
-        android:layout_width="88dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="--"
-        android:textAlignment="center"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/booking_open_text" />
-
-    <TextView
-        android:id="@+id/booking_month"
-        android:layout_width="92dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="--"
-        android:textAlignment="center"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/booking_date"
-        app:layout_constraintTop_toBottomOf="@+id/booking_open_text" />
-
-    <TextView
-        android:id="@+id/booking_year"
-        android:layout_width="106dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="----"
-        android:textAlignment="center"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/booking_month"
-        app:layout_constraintTop_toBottomOf="@+id/booking_open_text" />
+        app:layout_constraintTop_toBottomOf="@+id/alarm_type" />
 
 
     <TextView
         android:id="@+id/select_alarm_type_text"
-        android:layout_width="155dp"
+        android:layout_width="0dp"
         android:layout_height="39dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:gravity="bottom"
         android:text="@string/select_alarm_type_text"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_of_journey" />
+        app:layout_constraintTop_toBottomOf="@+id/from_station" />
 
 
     <View
         android:id="@+id/divider"
-        android:layout_width="320dp"
+        android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintStart_toStartOf="parent"
@@ -228,37 +125,49 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/reminder_action"
-        android:layout_width="144dp"
+        android:id="@+id/time_picker_button"
+        style="?android:attr/spinnerStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:layout_weight="1"
-        android:text="Select Time"
-        android:visibility="gone"
+        android:text="@string/time"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/date_picker"
+        app:layout_constraintTop_toTopOf="@+id/date_picker" />
+
+    <android.support.design.card.MaterialCardView
+        android:id="@+id/material_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alarm_type" />
+        app:layout_constraintTop_toBottomOf="@+id/date_picker"
+        app:cardBackgroundColor="@color/mainActivityBackground"
+        android:visibility="gone">
 
-    <TextView
-        android:id="@+id/selected_time_text"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginStart="40dp"
-        android:text="Selected Time"
-        android:visibility="gone"
-        app:layout_constraintStart_toEndOf="@+id/reminder_action"
-        app:layout_constraintTop_toTopOf="@+id/reminder_action" />
 
-    <TextView
-        android:id="@+id/selected_time"
-        android:layout_width="66dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="8dp"
-        android:gravity="bottom"
-        android:text="--.--"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/selected_time_text"
-        app:layout_constraintTop_toBottomOf="@+id/selected_time_text" />
+        <TextView
+            android:id="@+id/booking_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Booking opens on"
+            android:layout_marginTop="8sp"
+            android:layout_marginLeft="8sp"
+            android:textColor="@android:color/background_dark" />
 
+        <TextView
+            android:id="@+id/booking_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130sp"
+            android:layout_marginTop="8sp"
+            android:text="27 October 2018"
+            android:textColor="@android:color/background_dark"
+            android:textStyle="bold|italic" />
+
+    </android.support.design.card.MaterialCardView>
 
 </android.support.constraint.ConstraintLayout>

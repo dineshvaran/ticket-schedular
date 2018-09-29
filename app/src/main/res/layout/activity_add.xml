@@ -60,22 +60,6 @@
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/from_station" />
 
-    <!--<TextView-->
-        <!--android:id="@+id/date_of_journey"-->
-        <!--android:layout_width="151dp"-->
-        <!--android:layout_height="46dp"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:ems="10"-->
-        <!--android:gravity="center"-->
-        <!--android:inputType="date"-->
-        <!--android:text="@string/date_of_journey"-->
-        <!--android:textAlignment="center"-->
-        <!--android:textColor="@android:color/background_dark"-->
-        <!--android:textSize="16sp"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/from_station" />-->
-
     <Button
         android:id="@+id/date_picker"
         style="?android:attr/spinnerStyle"
@@ -88,40 +72,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/from_station" />
 
-    <!--<TextView-->
-        <!--android:id="@+id/selected_date"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:text="Selected Date"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/date_picker"-->
-        <!--app:layout_constraintTop_toTopOf="@+id/date_picker" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/selected_date_value"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="24dp"-->
-        <!--android:layout_marginTop="4dp"-->
-        <!--android:text="&#45;&#45;.&#45;&#45;.&#45;&#45;&#45;&#45;"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/date_picker"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/selected_date" />-->
-
-    <!--<Switch-->
-        <!--android:id="@+id/alarm_switch"-->
-        <!--android:layout_width="195dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:layout_marginTop="320dp"-->
-        <!--android:switchMinWidth="20dp"-->
-        <!--android:switchPadding="75dp"-->
-        <!--android:text="Add Reminder"-->
-        <!--android:textAlignment="textStart"-->
-        <!--android:textSize="16sp"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/date_of_journey"-->
-        <!--tools:checked="true" />-->
 
     <TextView
         android:id="@+id/booking_open_text"

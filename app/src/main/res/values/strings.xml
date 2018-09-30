@@ -30,7 +30,8 @@
 
     <string name="selectedDatePastError">Selected Date is in past</string>
     <string name="bookingDatePastError">Booking Date is in past</string>
-    <string name="selectedTimePastError">Select time to remind</string>
+    <string name="selectedTimePastError">Select TIME to remind</string>
+    <string name="selectJourneyDate">Select JOURNEY Date</string>
 
     <!--action bar strings-->
     <string name="action_add">Add</string>
@@ -44,9 +45,9 @@
     <string name="toast_select_journey_date">Select Journey Date</string>
     <string name="toast_success_message">Reminder Added</string>
     <!--Error-->
-    <string name="toast_enter_description">Enter Description</string>
-    <string name="toast_enter_from_station">Enter From Location</string>
-    <string name="toast_enter_to_station">Enter To Location</string>
+    <string name="toast_enter_description">required</string>
+    <string name="toast_enter_from_station">required</string>
+    <string name="toast_enter_to_station">required</string>
 
 
     <!--notification-->

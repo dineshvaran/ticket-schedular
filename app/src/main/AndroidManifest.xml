@@ -37,7 +37,7 @@
         </activity>
 
         <activity android:name="varanz.android.application.irctcticketreminder.AddActivity"
-            android:label="@string/application_name">
+            android:label="@string/app_add_activity">
 
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->

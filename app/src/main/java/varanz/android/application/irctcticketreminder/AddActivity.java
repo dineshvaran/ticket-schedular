@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.design.card.MaterialCardView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -41,6 +40,7 @@ import varanz.android.application.irctcticketreminder.store.TicketSchedularEntit
 public class AddActivity extends AppCompatActivity {
 
     private final String className = AddActivity.class.getSimpleName();
+    private static final int INT_DEFAULT_VALUE = -1;
 
     /**
      * used to start service (stores date and time in Millis)
@@ -48,14 +48,17 @@ public class AddActivity extends AppCompatActivity {
     private long alarmTime;
 
     // selected date, month and year
-    private int sdate=0;
-    private int smonth=0;
-    private int syear=0;
+    private int sDate = INT_DEFAULT_VALUE;
+    private int sMonth = INT_DEFAULT_VALUE;
+    private int sYear = INT_DEFAULT_VALUE;
+
+    private int sHour = INT_DEFAULT_VALUE;
+    private int sMinute = INT_DEFAULT_VALUE;
 
     // booking date, month and year
-    private int bdate=0;
-    private int bmonth=0;
-    private int byear=0;
+    private int bDate = INT_DEFAULT_VALUE;
+    private int bMonth = INT_DEFAULT_VALUE;
+    private int bYear = INT_DEFAULT_VALUE;
 
     /**
      * Views in this activity
@@ -75,7 +78,7 @@ public class AddActivity extends AppCompatActivity {
     boolean isRecordSaved = false;
 
     // value is 0, when no empty record is inserted.
-    int ticketId= 0;
+    int ticketId = 0;
 
     /**
      * used for CRUD operation
@@ -88,7 +91,6 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
         initializeViewObjects();
         addListeners();
-
         database = Room.databaseBuilder(getApplicationContext(),
                 TicketSchedularDataBase.class, TicketSchedularEntity.class.getSimpleName())
                 .allowMainThreadQueries().build();
@@ -104,47 +106,31 @@ public class AddActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(validateInputs()) {
-
-            if (validateSelectedDate() && validateBookingDate()) {
-                int radioItemId = alarmRadioGroup.getCheckedRadioButtonId();
-                RadioButton radioItem = findViewById(radioItemId);
-
-                if (radioItem.getText().toString().equals(getString(R.string.alarm_radio_item))) {
-
-                    saveData(getString(R.string.alarm_radio_item));
-                    setAlarm(alarmTime);
-                    Toast.makeText(this, getString(R.string.toast_success_message), Toast.LENGTH_SHORT).show();
-                    finish();
-
-                } else {
-
-                    Calendar beginTime = Calendar.getInstance();
-                    beginTime.set(byear, bmonth, bdate, 8, 0);
-
-                    Calendar endTime = Calendar.getInstance();
-                    endTime.set(byear, bmonth, bdate, 8, 30);
-
-                    Intent intent = new Intent(Intent.ACTION_INSERT)
-                            .setData(CalendarContract.Events.CONTENT_URI)
-                            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
-                            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-
-                            // added instead of selectedDate TODO temorary fix
-                            .putExtra(CalendarContract.Events.TITLE, "TicketSchedular -- " + "Booking opens")
-
-
-                            .putExtra(CalendarContract.Events.DESCRIPTION, "Book ticket from " + fromStation.getText().toString()
-                                    + " to " + toStation.getText().toString())
-                            .putExtra(CalendarContract.Events.EVENT_LOCATION, "www.irctc.co.in")
-                            .putExtra(Intent.EXTRA_EMAIL, "algebra.app.help@gmail.com");
-
-                    startActivity(intent);
-                }
-
+        if (validateInputs() && validateSelectedDate() && validateBookingDate() && validateSelectedTime()) {
+            int radioItemId = alarmRadioGroup.getCheckedRadioButtonId();
+            RadioButton radioItem = findViewById(radioItemId);
+            if (radioItem.getText().toString().equals(getString(R.string.alarm_radio_item))) {
+                saveData(getString(R.string.alarm_radio_item));
+                setAlarm(alarmTime);
+                Toast.makeText(this, getString(R.string.toast_success_message), Toast.LENGTH_SHORT).show();
+                finish();
             } else {
-                Toast.makeText(this, getString(R.string.dateError), Toast.LENGTH_LONG).show();
+                saveData(getString(R.string.add_to_calendar_item_value));
+                Calendar beginTime = Calendar.getInstance();
+                beginTime.set(bYear, bMonth, bDate, sHour, sMinute);
+                Calendar endTime = Calendar.getInstance();
+                endTime.set(bYear, bMonth, bDate, sHour, (sMinute + 30));
+                Intent intent = new Intent(Intent.ACTION_INSERT)
+                        .setData(CalendarContract.Events.CONTENT_URI)
+                        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+                        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+                        // added instead of selectedDate TODO temorary fix
+                        .putExtra(CalendarContract.Events.TITLE, "TicketSchedular -- " + "Booking opens")
+                        .putExtra(CalendarContract.Events.DESCRIPTION, "Book ticket from " + fromStation.getText().toString()
+                                + " to " + toStation.getText().toString())
+                        .putExtra(CalendarContract.Events.EVENT_LOCATION, "www.irctc.co.in")
+                        .putExtra(Intent.EXTRA_EMAIL, "algebra.app.help@gmail.com");
+                startActivity(intent);
             }
         }
 
@@ -154,15 +140,16 @@ public class AddActivity extends AppCompatActivity {
 
     /**
      * Updates the empty ticket in Database
+     *
      * @param reminderType enum ReminderType
      */
-    public void saveData(String reminderType){
+    public void saveData(String reminderType) {
 
         Calendar journey = Calendar.getInstance();
-        journey.set(syear,smonth,sdate);
+        journey.set(sYear, sMonth, sDate);
 
         Calendar booking = Calendar.getInstance();
-        booking.set(byear,bmonth,bdate);
+        booking.set(bYear, bMonth, bDate);
 
         TicketSchedularEntity entity = new TicketSchedularEntity();
         entity.setTicketId(ticketId);
@@ -174,22 +161,28 @@ public class AddActivity extends AppCompatActivity {
         entity.setBookingDate(booking);
 
         database.getTicketSchedularDao().updateTicketDetail(entity);
-        isRecordSaved= true;
+        isRecordSaved = true;
     }
 
 
     /**
      * Inserts an empty record in the database
      */
-    public void insertEmptyData(){
+    public void insertEmptyData() {
         TicketSchedularEntity entity = new TicketSchedularEntity();
-        ticketId= (int)database.getTicketSchedularDao().insertTicketDetail(entity);
+        ticketId = (int) database.getTicketSchedularDao().insertTicketDetail(entity);
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         deleteEmptyData();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        deleteEmptyData();
+        super.onStop();
     }
 
     @Override
@@ -201,9 +194,9 @@ public class AddActivity extends AppCompatActivity {
     /**
      * deletes empty data when record is not saved.
      */
-    private void deleteEmptyData(){
+    private void deleteEmptyData() {
 
-        if(!isRecordSaved){
+        if (!isRecordSaved) {
             database.getTicketSchedularDao().deleteTicketDetailByTicketId(ticketId);
         }
     }
@@ -215,36 +208,37 @@ public class AddActivity extends AppCompatActivity {
         datePickerButton = findViewById(R.id.date_picker);
         ticketDescription = findViewById(R.id.ticket_description);
         fromStation = findViewById(R.id.from_station);
-        toStation= findViewById(R.id.to_station);
+        toStation = findViewById(R.id.to_station);
         timePickerButton = findViewById(R.id.time_picker_button);
-        alarmRadioGroup= findViewById(R.id.alarm_type);
-        materialCardView=findViewById(R.id.material_card_view);
-        bookingDateText=findViewById(R.id.booking_date_text);
+        alarmRadioGroup = findViewById(R.id.alarm_type);
+        materialCardView = findViewById(R.id.material_card_view);
+        bookingDateText = findViewById(R.id.booking_date_text);
     }
 
     /**
      * Validates the user Input
+     *
      * @return boolean
      */
-    private boolean validateInputs(){
-        if(TextUtils.isEmpty(ticketDescription.getText())){
+    private boolean validateInputs() {
+        if (TextUtils.isEmpty(ticketDescription.getText())) {
             ticketDescription.setError(getString(R.string.toast_enter_description));
             return false;
-        }else{
+        } else {
             ticketDescription.setError(null);
         }
 
-        if(TextUtils.isEmpty(fromStation.getText())){
+        if (TextUtils.isEmpty(fromStation.getText())) {
             fromStation.setError(getString(R.string.toast_enter_from_station));
             return false;
-        }else{
+        } else {
             fromStation.setError(null);
         }
 
-        if(TextUtils.isEmpty(toStation.getText())){
+        if (TextUtils.isEmpty(toStation.getText())) {
             toStation.setError(getString(R.string.toast_enter_to_station));
             return false;
-        }else{
+        } else {
             toStation.setError(null);
         }
 
@@ -253,44 +247,58 @@ public class AddActivity extends AppCompatActivity {
 
     /**
      * validates whether selected date is less than the present date
+     *
      * @return boolean
      */
-    private boolean validateSelectedDate(){
+    private boolean validateSelectedDate() {
+        boolean result;
         Calendar today = Calendar.getInstance();
         Calendar selectedDate = Calendar.getInstance();
-        selectedDate.set(syear,smonth,sdate);
-        return selectedDate.getTime().after(today.getTime());
+        selectedDate.set(sYear, sMonth, sDate);
+        result = selectedDate.getTime().after(today.getTime());
+        if (!result)
+            Toast.makeText(this, getString(R.string.selectedDatePastError), Toast.LENGTH_LONG).show();
+        return result;
 
+    }
+
+    private boolean validateSelectedTime() {
+        if (sHour == INT_DEFAULT_VALUE) {
+            Toast.makeText(this, getString(R.string.selectedTimePastError), Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
     /**
      * validates whether booking date is less than the present date
+     *
      * @return boolean
      */
-    private boolean validateBookingDate(){
+    private boolean validateBookingDate() {
+        boolean result;
         Calendar today = Calendar.getInstance();
         Calendar bookingDate = Calendar.getInstance();
-        bookingDate.set(byear,bmonth,bdate);
-        return bookingDate.getTime().after(today.getTime());
+        bookingDate.set(bYear, bMonth, bDate);
+        result = bookingDate.getTime().after(today.getTime());
+        if (!result)
+            Toast.makeText(this, getString(R.string.bookingDatePastError), Toast.LENGTH_LONG).show();
+        return result;
     }
 
     /**
      * Listens to the event of Views
      */
-    private void addListeners(){
-
+    private void addListeners() {
         datePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 InputMethodManager inputMethodManager =
                         (InputMethodManager) AddActivity.this.getSystemService(INPUT_METHOD_SERVICE);
                 View view = AddActivity.this.getCurrentFocus();
-
-                if(null == view){
+                if (null == view) {
                     view = new View(AddActivity.this);
                 }
-
                 if (inputMethodManager != null) {
                     inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
@@ -302,21 +310,22 @@ public class AddActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                        showDialog("timePicker").show();
+                showDialog("timePicker").show();
             }
         });
     }
 
     /**
      * Returns the Calendar Object in Milli Seconds
-     * @param date month date
-     * @param month month
-     * @param year year
-     * @param hour hour
+     *
+     * @param date   month date
+     * @param month  month
+     * @param year   year
+     * @param hour   hour
      * @param minute minute
      * @return long
      */
-    public long getReminderinMillis(int date, int month, int year, int hour, int minute){
+    public long getReminderinMillis(int date, int month, int year, int hour, int minute) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, date, hour, minute, 0);
         return calendar.getTimeInMillis();
@@ -324,6 +333,7 @@ public class AddActivity extends AppCompatActivity {
 
     /**
      * Activates the Media service on the given time
+     *
      * @param remindTime when to remind in millis
      */
     public void setAlarm(long remindTime) {
@@ -341,12 +351,12 @@ public class AddActivity extends AppCompatActivity {
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, remindTime,
                     AlarmManager.INTERVAL_DAY, pendingAlarmIntent);
         }
-        Toast.makeText(this, "You will be reminded when booking opens.", Toast.LENGTH_LONG).show();
         Log.d(className, "setAlarm method end");
     }
 
     /**
      * Shows date picker or time picker dialog based on the parameter value.
+     *
      * @param dialogToShow datePicker or timePicker
      * @return Dialag
      */
@@ -354,8 +364,7 @@ public class AddActivity extends AppCompatActivity {
     private Dialog showDialog(String dialogToShow) {
         Calendar c = Calendar.getInstance();
         Dialog dialog = null;
-        switch (dialogToShow)
-        {
+        switch (dialogToShow) {
             case "datePicker":
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
@@ -366,7 +375,7 @@ public class AddActivity extends AppCompatActivity {
             case "timePicker":
                 int hour = c.get(Calendar.HOUR_OF_DAY);
                 int minute = c.get(Calendar.MINUTE);
-                dialog =  new TimePickerDialog(AddActivity.this, time_listener, hour, minute,
+                dialog = new TimePickerDialog(AddActivity.this, time_listener, hour, minute,
                         DateFormat.is24HourFormat(AddActivity.this));
                 break;
         }
@@ -380,25 +389,25 @@ public class AddActivity extends AppCompatActivity {
 
         @Override
         public void onDateSet(DatePicker view, int year, int month, int day) {
-           // updating journey date
-            sdate=day;
-            smonth=month;
-            syear=year;
+            // updating journey date
+            sDate = day;
+            sMonth = month;
+            sYear = year;
             SimpleDateFormat format = new SimpleDateFormat("EEEE", Locale.US);
             SimpleDateFormat formatB = new SimpleDateFormat("dd MMMM yyyy", Locale.US);
             // calculating booking date
             Calendar calendar = Calendar.getInstance();
             calendar.set(year, month, day);
-            String weekDay=format.format(calendar.getTime());
+            String weekDay = format.format(calendar.getTime());
             calendar.add(Calendar.DATE, -120);
             // updating booking date
-            bdate=calendar.get(Calendar.DATE);
-            bmonth=calendar.get(Calendar.MONTH);
-            byear=calendar.get(Calendar.YEAR);
+            bDate = calendar.get(Calendar.DATE);
+            bMonth = calendar.get(Calendar.MONTH);
+            bYear = calendar.get(Calendar.YEAR);
 
             materialCardView.setVisibility(View.VISIBLE);
             bookingDateText.setText(formatB.format(calendar.getTime()));
-            datePickerButton.setText(String.format(getString(R.string.selectedDateFormat), day, (month+1), year, weekDay));
+            datePickerButton.setText(String.format(getString(R.string.selectedDateFormat), day, (month + 1), year, weekDay));
         }
     };
 
@@ -408,10 +417,10 @@ public class AddActivity extends AppCompatActivity {
     TimePickerDialog.OnTimeSetListener time_listener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hour, int minute) {
-
-            long remindTime = getReminderinMillis(sdate, smonth, syear,hour, minute);
-            timePickerButton.setText(String.format(getString(R.string.selectedTimeFormat), hour, minute));
-            alarmTime = remindTime;
+            sHour = hour;
+            sMinute = minute;
+            alarmTime = getReminderinMillis(sDate, sMonth, sYear, sHour, sMinute);
+            timePickerButton.setText(String.format(getString(R.string.selectedTimeFormat), sHour, sMinute));
         }
     };
 }

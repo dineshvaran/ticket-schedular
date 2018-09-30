@@ -107,7 +107,8 @@
         android:layout_marginTop="16dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/select_alarm_type_text">
+        app:layout_constraintTop_toBottomOf="@+id/select_alarm_type_text"
+        android:checkedButton="@id/alarm_radio_button">
 
         <RadioButton
             android:id="@+id/alarm_radio_button"

@@ -12,7 +12,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -42,16 +45,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int index) {
         TicketSchedularEntity ticket = ticketList.get(index);
         SimpleDateFormat format = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);
-        String journeyDateString= "";
+        String fBookingDate= "";
+        String fJourneyDate= "";
         String emptyDescription= context.getString(R.string.empty_ticket_description);
-        Date bookingDate = null;
-        if(null!= ticket.getJourneyDate()){
-            bookingDate = ticket.getBookingDate().getTime();
-            journeyDateString = String.format(
-                    context.getString(R.string.booking_open_desc),
-                    format.format(bookingDate)
-            );
-        }
 
         if(TextUtils.isEmpty(ticket.getTicetDescription())){
             viewHolder.tripDescription.setText(emptyDescription);
@@ -59,7 +55,29 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             viewHolder.tripDescription.setText(ticket.getTicetDescription());
         }
 
-        viewHolder.bookingText.setText(journeyDateString);
+        if(null!= ticket.getBookingDate()){
+            fBookingDate = String.format(
+                    context.getString(R.string.booking_open_desc),
+                    format.format(ticket.getBookingDate().getTime())
+            );
+        }
+
+        if(null!= ticket.getJourneyDate()){
+            fJourneyDate = String.format(
+                    context.getString(R.string.journeyDateDesc),
+                    format.format(ticket.getJourneyDate().getTime())
+            );
+        }
+
+        viewHolder.bookingText.setText(fBookingDate);
+        viewHolder.journeyText.setText(fJourneyDate);
+        if(ticket.getReminderType().equals(context.getString(R.string.alarm_radio_item))){
+            viewHolder.reminderType.setImageDrawable(context.getDrawable(R.drawable.ic_alarm_black_24dp));
+        }else{
+            viewHolder.reminderType.setImageDrawable(context.getDrawable(R.drawable.ic_event_black_24dp));
+        }
+
+
 
 //        viewHolder.view.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -79,12 +97,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private View view;
         private TextView tripDescription;
         private TextView bookingText;
+        private TextView journeyText;
+        private ImageView reminderType;
 
         public ViewHolder(View view){
             super(view);
             view = view;
             tripDescription = view.findViewById(R.id.ticket_description);
             bookingText = view.findViewById(R.id.booking_date_text);
+            journeyText=view.findViewById(R.id.journey_date_text);
+            reminderType=view.findViewById(R.id.reminder_type);
         }
     }
 }

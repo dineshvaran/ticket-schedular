@@ -15,8 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/empty_message"
         android:textSize="30sp"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:background="@drawable/no_record_found"/>
+        <!--android:text="@string/empty_message"-->
+
 
 </android.support.constraint.ConstraintLayout>

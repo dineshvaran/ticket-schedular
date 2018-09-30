@@ -8,14 +8,18 @@
 
     <!--main activity-->
     <string name="booking_open_desc">Booking opens on %1$s</string>
+    <string name="journeyDateDesc">Journey on %1$s</string>
     <string name="empty_message">Oops! No Data</string>
-    <string name="empty_ticket_description">Error occured! Description is empty.</string>
+    <string name="empty_ticket_description">Error occured! Description is empty</string>
 
     <!--add activity-->
     <string name="from_station">From</string>
     <string name="to_station">To</string>
+
     <string name="alarm_radio_item">Alarm</string>
     <string name="add_to_calendar_item">Add to Calendar</string>
+    <string name="add_to_calendar_item_value">Calendar</string>
+
     <string name="alarm_button">Select Time</string>
     <string name="add_to_google_calendar_button">Add to Calendar</string>
     <string name="select_alarm_type_text">Select Reminder Type</string>
@@ -23,8 +27,10 @@
     <string name="time">Time</string>
     <string name="selectedDateFormat">%1$d / %2$d / %3$d %4$s</string>
     <string name="selectedTimeFormat">%1$d : %2$d</string>
-    <string name="dateError">Selected date or Booking date is in past.</string>
 
+    <string name="selectedDatePastError">Selected Date is in past</string>
+    <string name="bookingDatePastError">Booking Date is in past</string>
+    <string name="selectedTimePastError">Select time to remind</string>
 
     <!--action bar strings-->
     <string name="action_add">Add</string>
@@ -36,7 +42,7 @@
     <!--Info-->
     <string name="toast_google_calender_info">Click Save to Add to Google Calendar</string>
     <string name="toast_select_journey_date">Select Journey Date</string>
-    <string name="toast_success_message">Reminder added.</string>
+    <string name="toast_success_message">Reminder Added</string>
     <!--Error-->
     <string name="toast_enter_description">Enter Description</string>
     <string name="toast_enter_from_station">Enter From Location</string>

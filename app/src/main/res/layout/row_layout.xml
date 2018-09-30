@@ -23,9 +23,9 @@
 
     <ImageView
         android:id="@+id/reminder_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_width="25dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="20dp"
         android:contentDescription="Reminder Type"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,23 +36,27 @@
         android:id="@+id/booking_date_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:text="Booking Opens On"
         android:textAlignment="textStart"
-        android:textSize="16sp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/reminder_type"
-        app:layout_constraintTop_toTopOf="@+id/reminder_type" />
+        app:layout_constraintTop_toBottomOf="@+id/ticket_description" />
 
     <TextView
         android:id="@+id/journey_date_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Journey on September 13, 2019"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/reminder_type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/booking_date_text"
-        app:layout_constraintTop_toBottomOf="@+id/reminder_type" />
+        app:layout_constraintTop_toBottomOf="@+id/booking_date_text" />
 
 
 </android.support.constraint.ConstraintLayout>

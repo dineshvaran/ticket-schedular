@@ -252,6 +252,10 @@ public class AddActivity extends AppCompatActivity {
      */
     private boolean validateSelectedDate() {
         boolean result;
+
+        if(sYear==INT_DEFAULT_VALUE){
+            Toast.makeText(this,getString(R.string.selectJourneyDate), Toast.LENGTH_LONG).show();
+        }
         Calendar today = Calendar.getInstance();
         Calendar selectedDate = Calendar.getInstance();
         selectedDate.set(sYear, sMonth, sDate);

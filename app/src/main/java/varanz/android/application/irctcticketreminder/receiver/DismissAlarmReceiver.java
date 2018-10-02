@@ -15,13 +15,35 @@ public class DismissAlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i(className, "onReceive method starts");
-
-        Intent serviceIntent = new Intent(context, AlarmService.class);
-        context.stopService(serviceIntent);
-
-        NotificationManager notificationManager =
-                (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(context.getResources().getInteger(R.integer.alarm_notification_unique_id));
+        stopService(context);
+        dismissNotification(context,intent);
         Log.i(className, "onReceive method ends");
     }
+
+    /**
+     * stops AlarmService
+     * @param context context
+     */
+    private void stopService(Context context){
+        Log.i(className, "stopService method starts");
+        context.stopService(new Intent(context, AlarmService.class));
+        Log.i(className, "stopService method ends");
+    }
+
+    /**
+     * Dismisses ongoing notification
+     * @param context context
+     * @param intent intent
+     */
+    private void dismissNotification(Context context, Intent intent){
+        Log.i(className, "dismissNotification method starts");
+        int ticketId=intent.getIntExtra("ticketId",-1);
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (notificationManager != null) {
+            notificationManager.cancel(ticketId);
+        }
+        Log.i(className, "dismissNotification method ends");
+    }
+
 }

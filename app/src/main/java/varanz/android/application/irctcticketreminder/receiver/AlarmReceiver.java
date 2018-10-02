@@ -32,24 +32,47 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(receiverName, "onCreate method started");
+        Log.i(receiverName, "onCreate method started");
+        startService(context);
+        createNotifiction(context, intent);
+        Log.i(receiverName, "onCreate method ended");
 
-        String channelId="channel_default";
-        CharSequence channelName = context.getString(R.string.channel_default);
+    }
+
+    /**
+     * Starts AlarmService
+     *
+     * @param context context
+     */
+    private void startService(Context context) {
+        context.startService(new Intent(context, AlarmService.class));
+    }
+
+    /**
+     * Creates Notification for the ongoing alarm.
+     *
+     * @param context context
+     * @param intent  intent
+     */
+    private void createNotifiction(Context context, Intent intent) {
+        int ticketId = intent.getIntExtra("ticketId", -1);
+        String channelId = "channel_default";
+        CharSequence channelName = context.getString(R.string.channelNameHigh);
         String notificationTitle = "Reminder to Book Ticket";
-        if(!intent.getStringExtra("fromStation").equals("") &&
-                !intent.getStringExtra("toStation").equals("")){
+
+        if (!intent.getStringExtra("fromStation").equals("") &&
+                !intent.getStringExtra("toStation").equals("")) {
             notificationTitle = intent.getStringExtra("fromStation") +
                     "  ->  " + intent.getStringExtra("toStation");
         }
 
-        Intent serviceIntent = new Intent(context, AlarmService.class);
-        context.startService(serviceIntent);
-
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (null==notificationManager) {
+            return;
+        }
         Intent dismissAlarmIntent = new Intent(context, DismissAlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 321,
                 dismissAlarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-
 
         NotificationCompat.Builder notification = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.ic_train)
@@ -64,18 +87,11 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setOngoing(true)
                 .setWhen(System.currentTimeMillis());
 
-
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel channelHigh =
-                    new NotificationChannel(channelId,channelName, NotificationManager.IMPORTANCE_DEFAULT);
+                    new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(channelHigh);
         }
-        notificationManager.notify(context.getResources().getInteger(R.integer.alarm_notification_unique_id),
-                notification.build());
-
-
-        Log.d(receiverName, "onCreate method ended");
-
+        notificationManager.notify(ticketId, notification.build());
     }
 }

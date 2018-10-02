@@ -52,7 +52,7 @@
 
 
     <!--notification-->
-    <string name="channel_default">High</string>
+    <string name="channelNameHigh">High</string>
 
 
 </resources>

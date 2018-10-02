@@ -104,6 +104,7 @@ public class AddActivity extends AppCompatActivity {
         database = Room.databaseBuilder(getApplicationContext(),
                 TicketSchedularDataBase.class, TicketSchedularEntity.class.getSimpleName())
                 .allowMainThreadQueries().build();
+
         insertEmptyData();
     }
 
@@ -133,7 +134,7 @@ public class AddActivity extends AppCompatActivity {
 
     private void checkCalendarPermisson() {
 //        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_GRANTED) {
-            pushEventToCalender();
+        pushEventToCalender();
 //        } else {
 //            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_CALENDAR}, CALENDAR_PERMISSON);
 //        }
@@ -238,6 +239,14 @@ public class AddActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (isRecordSaved) {
+            finish();
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         deleteEmptyData();
@@ -307,6 +316,7 @@ public class AddActivity extends AppCompatActivity {
 
         if (sYear == INT_DEFAULT_VALUE) {
             Toast.makeText(this, getString(R.string.selectJourneyDate), Toast.LENGTH_LONG).show();
+            return false;
         }
         Calendar today = Calendar.getInstance();
         Calendar selectedDate = Calendar.getInstance();

@@ -11,6 +11,7 @@ import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,15 +33,45 @@ public class MainActivity extends AppCompatActivity {
      */
     TicketSchedularDataBase database;
 
+    /**
+     * Views
+     */
+    FloatingActionButton fab;
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initialize();
+        addListenerToViews();
+
         database = Room.databaseBuilder(getApplicationContext(),
                 TicketSchedularDataBase.class, TicketSchedularEntity.class.getSimpleName())
                 .allowMainThreadQueries().build();
 
+    }
+
+    /**
+     * initialize's view
+     */
+    private void initialize(){
+        fab=findViewById(R.id.fab);
+    }
+
+    /**
+     * Adds listeners to views
+     */
+    private void addListenerToViews(){
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -84,8 +115,6 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = new Intent(MainActivity.this, AddActivity.class);
-        startActivity(intent);
         return super.onOptionsItemSelected(item);
     }
 }

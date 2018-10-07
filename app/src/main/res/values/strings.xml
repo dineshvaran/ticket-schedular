@@ -36,6 +36,7 @@
 
     <!--action bar strings-->
     <string name="action_add">Add</string>
+    <string name="action_info">Information</string>
     <string name="ticket_detail">Ticket Description</string>
     <string name="date_of_journey">Select Journey Date</string>
 

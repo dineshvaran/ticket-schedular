@@ -424,6 +424,7 @@ public class AddActivity extends AppCompatActivity {
         alarmIntent.putExtra("fromStation", fromStation.getText().toString());
         alarmIntent.putExtra("toStation", toStation.getText().toString());
         alarmIntent.putExtra("ticketId", ticketId);
+        alarmIntent.putExtra("journeyDate", (sDate+"/"+sMonth+"/"+sYear));
 
         PendingIntent pendingAlarmIntent =
                 PendingIntent.getBroadcast(getApplicationContext(), ticketId, alarmIntent, 0);

@@ -113,7 +113,7 @@ public class AlarmService extends Service {
                 .setOngoing(true)
                 .setContentIntent(notificationDetailPendingIntent)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(
-                        Html.fromHtml("<big><i>Journey date is "+journeyDate+"</big></i><br>"
+                        Html.fromHtml("<big>Journey date is "+journeyDate+"</big><br>"
                                 + intent.getStringExtra("ticketDescription"))))
                 .setWhen(System.currentTimeMillis());
 

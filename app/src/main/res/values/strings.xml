@@ -11,7 +11,7 @@
     <string name="booking_open_desc">Booking opens on %1$s</string>
     <string name="journeyDateDesc">Journey on %1$s</string>
     <string name="empty_message">Oops! No Data</string>
-    <string name="empty_ticket_description">Error occured! Description is empty</string>
+    <string name="empty_ticket_description">Error occurred! Description is empty</string>
 
     <!--add activity-->
     <string name="from_station">From</string>
@@ -54,6 +54,725 @@
 
     <!--notification-->
     <string name="channelNameHigh">High</string>
+
+    <string-array name="stationList">
+        <item>	Abu Road	</item>
+        <item>	Adilabad	</item>
+        <item>	Adoni	</item>
+        <item>	Adra	</item>
+        <item>	Agartala	</item>
+        <item>	Agra Fort	</item>
+        <item>	Agra Cantt.	</item>
+        <item>	Ahmadnagar	</item>
+        <item>	Ahmedabad	</item>
+        <item>	Ajmer	</item>
+        <item>	Ajni	</item>
+        <item>	Akola	</item>
+        <item>	Aligarh	</item>
+        <item>	Alipurduar Jn.	</item>
+        <item>	Allahabad	</item>
+        <item>	Alappuzha	</item>
+        <item>	Alnawar Jn.	</item>
+        <item>	Aluva	</item>
+        <item>	Alwar	</item>
+        <item>	Amalner	</item>
+        <item>	Amb Andavra	</item>
+        <item>	Ambala Cantt.	</item>
+        <item>	Ambikapur	</item>
+        <item>	Amla	</item>
+        <item>	Amritsar	</item>
+        <item>	Anakapalle	</item>
+        <item>	Anand	</item>
+        <item>	Anand Nagar	</item>
+        <item>	Anand Vihar Terminus	</item>
+        <item>	Anantapur	</item>
+        <item>	Angul	</item>
+        <item>	Annavaram	</item>
+        <item>	Anuppur	</item>
+        <item>	Ara	</item>
+        <item>	Arakkonam	</item>
+        <item>	Arsikere	</item>
+        <item>	Asansol	</item>
+        <item>	Aunrihar	</item>
+        <item>	Aurangabad	</item>
+        <item>	Ayodhya	</item>
+        <item>	Azamgarh	</item>
+        <item>	Azimganj Jn.	</item>
+        <item>	Badarpur	</item>
+        <item>	Badnera Jn.	</item>
+        <item>	Bagalkot	</item>
+        <item>	Baghpat Road	</item>
+        <item>	Baidyanathdham	</item>
+        <item>	Bakthiyarpur	</item>
+        <item>	Balasore	</item>
+        <item>	Balaghat	</item>
+        <item>	Balangir	</item>
+        <item>	Balugaon	</item>
+        <item>	Balurghat	</item>
+        <item>	Balharshah	</item>
+        <item>	Ballia	</item>
+        <item>	Banarhat	</item>
+        <item>	Banda Jn.	</item>
+        <item>	Bandel Jn.	</item>
+        <item>	Bandikui Jn.	</item>
+        <item>	Bandra (T)	</item>
+        <item>	Bangalore City	</item>
+        <item>	Bangalore Cantt.	</item>
+        <item>	Bangarapet	</item>
+        <item>	Bangriposi	</item>
+        <item>	Bankura	</item>
+        <item>	Banmankhi	</item>
+        <item>	Bapatla	</item>
+        <item>	Barabanki Jn.	</item>
+        <item>	Barabil	</item>
+        <item>	Baran	</item>
+        <item>	Barauni Jn.	</item>
+        <item>	Baraut	</item>
+        <item>	Barapalli	</item>
+        <item>	Barddhaman Jn.	</item>
+        <item>	Bareilly	</item>
+        <item>	Bargarh Road	</item>
+        <item>	Barhni	</item>
+        <item>	Barkakana	</item>
+        <item>	Barmer	</item>
+        <item>	Barog	</item>
+        <item>	Barsoi	</item>
+        <item>	Barwadih	</item>
+        <item>	Basar	</item>
+        <item>	Basti	</item>
+        <item>	Bathinda Jn.	</item>
+        <item>	Bayana	</item>
+        <item>	Beas	</item>
+        <item>	Beawar	</item>
+        <item>	Belapur	</item>
+        <item>	Belgaum	</item>
+        <item>	Bellary Jn.	</item>
+        <item>	Bettiah	</item>
+        <item>	Betul	</item>
+        <item>	Bhadohi	</item>
+        <item>	Bhadrak	</item>
+        <item>	Bhagalpur	</item>
+        <item>	Bhagat Ki Kothi	</item>
+        <item>	Bharatpur	</item>
+        <item>	Bharuch	</item>
+        <item>	Bhatapara	</item>
+        <item>	Bhatkal	</item>
+        <item>	Bhatni	</item>
+        <item>	Bhavnagar (T)	</item>
+        <item>	Bhawanipatna	</item>
+        <item>	Bhilwara	</item>
+        <item>	Bhimavaram Jn.	</item>
+        <item>	Bhimavaram Town	</item>
+        <item>	Bhind	</item>
+        <item>	Bhiwani	</item>
+        <item>	Bhopal	</item>
+        <item>	Bhubaneswar	</item>
+        <item>	Bhuj	</item>
+        <item>	Bhusaval	</item>
+        <item>	Bijapur	</item>
+        <item>	Bijnor	</item>
+        <item>	Bikaner	</item>
+        <item>	Bilaspur Jn.	</item>
+        <item>	Bina	</item>
+        <item>	Binnaguri	</item>
+        <item>	Birur	</item>
+        <item>	Bitragunta	</item>
+        <item>	Biyavara Rajgarh	</item>
+        <item>	Bobbili	</item>
+        <item>	Boinda	</item>
+        <item>	Barapalli	</item>
+        <item>	Baghbahar	</item>
+        <item>	Bokaro Steel City	</item>
+        <item>	Bolpur Shantiniketan	</item>
+        <item>	Borivali	</item>
+        <item>	Botad	</item>
+        <item>	Budaun	</item>
+        <item>	Bundi	</item>
+        <item>	Burhanpur	</item>
+        <item>	Burhwal	</item>
+        <item>	Buxar	</item>
+        <item>	Canacona	</item>
+        <item>	Chakia	</item>
+        <item>	Chakki Bank	</item>
+        <item>	Chakradharpur	</item>
+        <item>	Chalisgaon	</item>
+        <item>	Champa	</item>
+        <item>	Chandausi	</item>
+        <item>	Chanderiya	</item>
+        <item>	Chandigarh	</item>
+        <item>	Chandil	</item>
+        <item>	Chandrapur	</item>
+        <item>	Chandrapura	</item>
+        <item>	Chaparmukh	</item>
+        <item>	Chatrapur	</item>
+        <item>	Chengalpattu Jn.	</item>
+        <item>	Chengannur	</item>
+        <item>	Chennai Central	</item>
+        <item>	Chennai Egmore	</item>
+        <item>	Chhapra	</item>
+        <item>	Chhindwara	</item>
+        <item>	Chidambaram	</item>
+        <item>	Chikjajur	</item>
+        <item>	Chiplun	</item>
+        <item>	Chirala	</item>
+        <item>	Chitrakootdham Karvi	</item>
+        <item>	Chittaranjan	</item>
+        <item>	Chittaurgarh	</item>
+        <item>	Chittoor	</item>
+        <item>	Chopan	</item>
+        <item>	Chunar	</item>
+        <item>	Churu	</item>
+        <item>	Coimbatore Jn.	</item>
+        <item>	Coonoor	</item>
+        <item>	Cuddalore Port	</item>
+        <item>	Cuddapah	</item>
+        <item>	Cuttack	</item>
+        <item>	Dadar	</item>
+        <item>	Dahanu Road	</item>
+        <item>	Dahod	</item>
+        <item>	Dalgaon	</item>
+        <item>	Daltonganj	</item>
+        <item>	Dallirajhara	</item>
+        <item>	Damoh	</item>
+        <item>	Danapur	</item>
+        <item>	Darbhanga	</item>
+        <item>	Daund	</item>
+        <item>	Davangere	</item>
+        <item>	Dehradun	</item>
+        <item>	Dehri-On-Sone	</item>
+        <item>	Delhi	</item>
+        <item>	New Delhi	</item>
+        <item>	Delhi Cantt.	</item>
+        <item>	Delhi Sarai Rohilla	</item>
+        <item>	Delhi Shahdara	</item>
+        <item>	Deoriasadar	</item>
+        <item>	Devlali	</item>
+        <item>	Dhamangaon	</item>
+        <item>	Dhanbad	</item>
+        <item>	Dharmabad	</item>
+        <item>	Dharmanagar	</item>
+        <item>	Dharmapuri	</item>
+        <item>	Dharmavaram	</item>
+        <item>	Dharwad	</item>
+        <item>	Dhasa	</item>
+        <item>	Dhaulpur	</item>
+        <item>	Dhenuanal	</item>
+        <item>	Dhola	</item>
+        <item>	Dhone	</item>
+        <item>	Dhrangadhra	</item>
+        <item>	Dhubri	</item>
+        <item>	Dhuri	</item>
+        <item>	Dibrugarh	</item>
+        <item>	Dibrugarh Town	</item>
+        <item>	Digha	</item>
+        <item>	Dildarnagar	</item>
+        <item>	Dimapur	</item>
+        <item>	Dindigul Jn.	</item>
+        <item>	Dongargarh	</item>
+        <item>	Dornakal	</item>
+        <item>	Dungarpur	</item>
+        <item>	Durg	</item>
+        <item>	Durgapur	</item>
+        <item>	Duvvada	</item>
+        <item>	Dwarka	</item>
+        <item>	Eluru	</item>
+        <item>	Ernakulam Jn.	</item>
+        <item>	Ernakulam Town	</item>
+        <item>	Erode	</item>
+        <item>	Etawah	</item>
+        <item>	Faizabad	</item>
+        <item>	Faridabad	</item>
+        <item>	Farrukhabad	</item>
+        <item>	Fatehabad Chand	</item>
+        <item>	Fatehpur	</item>
+        <item>	Fatuha	</item>
+        <item>	Fazilka	</item>
+        <item>	Firozabad	</item>
+        <item>	Firozpur City	</item>
+        <item>	Firozpur Cantt.	</item>
+        <item>	Forbesganj	</item>
+        <item>	Furkating	</item>
+        <item>	Gadag	</item>
+        <item>	Gajraula	</item>
+        <item>	Gandhidham	</item>
+        <item>	Gandhinagar	</item>
+        <item>	Gangapur City	</item>
+        <item>	Garwa Road	</item>
+        <item>	Gaya	</item>
+        <item>	Gevra Road	</item>
+        <item>	Ghatsila	</item>
+        <item>	Ghaziabad	</item>
+        <item>	Goalpara Town	</item>
+        <item>	Godhra	</item>
+        <item>	Gola Gokarannath	</item>
+        <item>	Gonda	</item>
+        <item>	Gondia	</item>
+        <item>	Gooty	</item>
+        <item>	Gorakhpur	</item>
+        <item>	Gossaingaon Hat	</item>
+        <item>	Gudivada	</item>
+        <item>	Gudur	</item>
+        <item>	Gulbarga	</item>
+        <item>	Guna	</item>
+        <item>	Guntakal	</item>
+        <item>	Guntur	</item>
+        <item>	Gurgaon	</item>
+        <item>	Guruvayur	</item>
+        <item>	Guwahati	</item>
+        <item>	Gwalior	</item>
+        <item>	Gyanpur Road	</item>
+        <item>	Habibganj	</item>
+        <item>	Hajipur	</item>
+        <item>	Haldia	</item>
+        <item>	Haldibari	</item>
+        <item>	Hamiltonganj	</item>
+        <item>	Hanumangarh	</item>
+        <item>	Hapa	</item>
+        <item>	Hapur	</item>
+        <item>	Harda	</item>
+        <item>	Haridwar	</item>
+        <item>	Harihar	</item>
+        <item>	Harpalpur	</item>
+        <item>	Hasimara	</item>
+        <item>	Hatia	</item>
+        <item>	Hazur Sahib Nanded	</item>
+        <item>	Hilsa	</item>
+        <item>	Himmat Nagar	</item>
+        <item>	Hindupur	</item>
+        <item>	Hingoli	</item>
+        <item>	Hisar	</item>
+        <item>	Hoshangabad	</item>
+        <item>	Hospet	</item>
+        <item>	Hosur	</item>
+        <item>	Howbadh	</item>
+        <item>	Howrah	</item>
+        <item>	Hubli	</item>
+        <item>	Hyderabad	</item>
+        <item>	Igatpuri	</item>
+        <item>	Indara	</item>
+        <item>	Indore	</item>
+        <item>	Islampur	</item>
+        <item>	Itarsi	</item>
+        <item>	Jabalpur	</item>
+        <item>	Jagdalpur	</item>
+        <item>	Jaipur	</item>
+        <item>	Jaypur	</item>
+        <item>	Jaisalmer	</item>
+        <item>	Jajpur Keonjhar Road	</item>
+        <item>	Jakhal	</item>
+        <item>	Jalamb	</item>
+        <item>	Jalandhar Cantt.	</item>
+        <item>	Jalandhar City	</item>
+        <item>	Jalgaon	</item>
+        <item>	Jalna	</item>
+        <item>	Jalpaiguri	</item>
+        <item>	Jamalpur	</item>
+        <item>	Jammu Tawi	</item>
+        <item>	Jamnagar	</item>
+        <item>	Janghai	</item>
+        <item>	Jasidih	</item>
+        <item>	Jaunpur Jn.	</item>
+        <item>	Jaynagar	</item>
+        <item>	Jetalsar	</item>
+        <item>	Jhajha	</item>
+        <item>	Jhansi	</item>
+        <item>	Jhargram	</item>
+        <item>	Jharsuguda	</item>
+        <item>	Jind	</item>
+        <item>	Jodhpur	</item>
+        <item>	Jogbani	</item>
+        <item>	Jolarpettai	</item>
+        <item>	Jorhat	</item>
+        <item>	Junagarh Jn.	</item>
+        <item>	Kacheguda	</item>
+        <item>	Kakinada Port	</item>
+        <item>	Kalchini	</item>
+        <item>	Kalka	</item>
+        <item>	Kalol	</item>
+        <item>	Kalyan	</item>
+        <item>	Kamakhya	</item>
+        <item>	Kanchipuram	</item>
+        <item>	Kandhla	</item>
+        <item>	Kanniyakumari	</item>
+        <item>	Kannur	</item>
+        <item>	Kanpur Central	</item>
+        <item>	Kanpur Anwarganj	</item>
+        <item>	Kaptanganj	</item>
+        <item>	Karaikal	</item>
+        <item>	Karaikkudi Jn.	</item>
+        <item>	Karimganj	</item>
+        <item>	Karnal	</item>
+        <item>	Karur	</item>
+        <item>	Karwar	</item>
+        <item>	Kasaragod	</item>
+        <item>	Kasganj	</item>
+        <item>	Kathgodam	</item>
+        <item>	Katihar	</item>
+        <item>	Katni	</item>
+        <item>	Katni Murwara	</item>
+        <item>	Katpadi	</item>
+        <item>	Katwa	</item>
+        <item>	Kazipet	</item>
+        <item>	Kesinga	</item>
+        <item>	Kendujhargarh	</item>
+        <item>	Khagaria	</item>
+        <item>	Khalilabad	</item>
+        <item>	Khammam	</item>
+        <item>	Khandwa	</item>
+        <item>	Kharagpur	</item>
+        <item>	Khekra	</item>
+        <item>	Khurda Road	</item>
+        <item>	Khurja	</item>
+        <item>	Kishanganj	</item>
+        <item>	Kishangarh	</item>
+        <item>	Kiul	</item>
+        <item>	Kochuveli	</item>
+        <item>	Kodaikanal Road	</item>
+        <item>	Kolkata	</item>
+        <item>	Kollam	</item>
+        <item>	Kopergaon	</item>
+        <item>	Koraput	</item>
+        <item>	Korba	</item>
+        <item>	Kota	</item>
+        <item>	Kotdwara	</item>
+        <item>	Kot Kapura	</item>
+        <item>	Kottayam	</item>
+        <item>	Kozhikode	</item>
+        <item>	Krishnanagar City	</item>
+        <item>	Krishnarajapuram	</item>
+        <item>	Kumarghat	</item>
+        <item>	Kumbakonam	</item>
+        <item>	Kundapura	</item>
+        <item>	Kurduwadi	</item>
+        <item>	Kurnool Town	</item>
+        <item>	Kurukshetra	</item>
+        <item>	Lakhimpur	</item>
+        <item>	Laksar	</item>
+        <item>	Lalgarh	</item>
+        <item>	Lalgola	</item>
+        <item>	Lalitpur	</item>
+        <item>	Lalkuan Jn.	</item>
+        <item>	Latur	</item>
+        <item>	Ledo	</item>
+        <item>	Loharu	</item>
+        <item>	Lokmanya Tilak (T)	</item>
+        <item>	Lonavla	</item>
+        <item>	Londa	</item>
+        <item>	Lower Halflong	</item>
+        <item>	Lucknow	</item>
+        <item>	Ludhiana	</item>
+        <item>	Lumding	</item>
+        <item>	Luni	</item>
+        <item>	Machilipatnam	</item>
+        <item>	Madarihat	</item>
+        <item>	Maddur	</item>
+        <item>	Madgaon (Goa)	</item>
+        <item>	Madhubani	</item>
+        <item>	Madhupur	</item>
+        <item>	Madurai Jn.	</item>
+        <item>	Mahasamund	</item>
+        <item>	Mahbubnagar	</item>
+        <item>	Mahuva	</item>
+        <item>	Muniguda	</item>
+        <item>	Mahesana	</item>
+        <item>	Mahoba	</item>
+        <item>	Mailani	</item>
+        <item>	Maksi	</item>
+        <item>	Malda Town	</item>
+        <item>	Manamadurai	</item>
+        <item>	Manduadih	</item>
+        <item>	Mangalore Central	</item>
+        <item>	Mangalore Jn.	</item>
+        <item>	Manikpur	</item>
+        <item>	Mankapur	</item>
+        <item>	Manmad	</item>
+        <item>	Mannargudi	</item>
+        <item>	Mansi	</item>
+        <item>	Manu	</item>
+        <item>	Mariani	</item>
+        <item>	Marwar Jn.	</item>
+        <item>	Mathura	</item>
+        <item>	Mau	</item>
+        <item>	Mayiladuturai Jn.	</item>
+        <item>	Meerut City	</item>
+        <item>	Merta Road	</item>
+        <item>	Mettupalayam	</item>
+        <item>	Midnapore	</item>
+        <item>	Miraj	</item>
+        <item>	Miryalaguda	</item>
+        <item>	Mirzapur	</item>
+        <item>	Moga	</item>
+        <item>	Mokama	</item>
+        <item>	Moradabad	</item>
+        <item>	Motihari	</item>
+        <item>	Mudkhed	</item>
+        <item>	Mughalsarai	</item>
+        <item>	Mumbai Central	</item>
+        <item>	Mumbai Cst	</item>
+        <item>	Muniguda	</item>
+        <item>	Muri	</item>
+        <item>	Murkeongselek	</item>
+        <item>	Murtajapur	</item>
+        <item>	Muzaffar Nagar	</item>
+        <item>	Muzaffarpur	</item>
+        <item>	Mysore	</item>
+        <item>	Nabadwipdham	</item>
+        <item>	Nadiad	</item>
+        <item>	Nadikudi	</item>
+        <item>	Nagappattinam	</item>
+        <item>	Nagarkata	</item>
+        <item>	Nagarsol	</item>
+        <item>	Nagbhir	</item>
+        <item>	Nagda	</item>
+        <item>	Nagercoil Jn.	</item>
+        <item>	Nagore	</item>
+        <item>	Nagpur	</item>
+        <item>	Nagrakata	</item>
+        <item>	Nainpur	</item>
+        <item>	Najibabad	</item>
+        <item>	Nalanda	</item>
+        <item>	Nalgonda	</item>
+        <item>	Namakkal	</item>
+        <item>	Nandalur	</item>
+        <item>	Nandgaon	</item>
+        <item>	Nandurbar	</item>
+        <item>	Nandyal	</item>
+        <item>	Nangal Dam	</item>
+        <item>	Narkatiaganj	</item>
+        <item>	Narasapur	</item>
+        <item>	Narsingpur	</item>
+        <item>	Narwana	</item>
+        <item>	Nasik Road	</item>
+        <item>	Naugarh	</item>
+        <item>	Nellore	</item>
+        <item>	Netaji Subhash	</item>
+        <item>	Chandra Bose Gomoh	</item>
+        <item>	New Alipurduar	</item>
+        <item>	New Bongaigaon	</item>
+        <item>	New Coochbehar	</item>
+        <item>	New Delhi	</item>
+        <item>	New Farakka	</item>
+        <item>	New Jalpaiguri	</item>
+        <item>	Newmal Jn.	</item>
+        <item>	New Tinsukia	</item>
+        <item>	Nidadavolu	</item>
+        <item>	Nidamangalam	</item>
+        <item>	Nidubrolu	</item>
+        <item>	Nimach	</item>
+        <item>	Nizamabad	</item>
+        <item>	Nizamuddin	</item>
+        <item>	Noli	</item>
+        <item>	North Lakhimpur	</item>
+        <item>	Odlabari	</item>
+        <item>	Okha	</item>
+        <item>	Ongole	</item>
+        <item>	Orai	</item>
+        <item>	Pachora	</item>
+        <item>	Palani	</item>
+        <item>	Palanpur	</item>
+        <item>	Palasa	</item>
+        <item>	Palakkad	</item>
+        <item>	Palakkad Town	</item>
+        <item>	Paliakalan	</item>
+        <item>	Pandharapur	</item>
+        <item>	Panipat	</item>
+        <item>	Paradeep	</item>
+        <item>	Parasnath	</item>
+        <item>	Panvel	</item>
+        <item>	Parbhani	</item>
+        <item>	Parvatipuram Town	</item>
+        <item>	Pathankot	</item>
+        <item>	Patiala	</item>
+        <item>	Patna	</item>
+        <item>	Patna Sahib	</item>
+        <item>	Phalodi	</item>
+        <item>	Phaphamau	</item>
+        <item>	Phulera	</item>
+        <item>	Pilibhit	</item>
+        <item>	Pipariya	</item>
+        <item>	Podanur	</item>
+        <item>	Porbandar	</item>
+        <item>	Pratapgarh	</item>
+        <item>	Puducherry	</item>
+        <item>	Pudukottai	</item>
+        <item>	Pulgaon	</item>
+        <item>	Pune Jn.	</item>
+        <item>	Puranpur	</item>
+        <item>	Puri	</item>
+        <item>	Purna	</item>
+        <item>	Purnia	</item>
+        <item>	Purulia	</item>
+        <item>	Radhikapur	</item>
+        <item>	Rae Bareli	</item>
+        <item>	Raichur	</item>
+        <item>	Raigarh	</item>
+        <item>	Raipur	</item>
+        <item>	Rajahmundry	</item>
+        <item>	Raja-Ka-Sahaspur	</item>
+        <item>	Raja-Ki-Mandi	</item>
+        <item>	Rajendranagar	</item>
+        <item>	Rajgir	</item>
+        <item>	Rajkot	</item>
+        <item>	Rajnandgaon	</item>
+        <item>	Rajpura	</item>
+        <item>	Ramagundam	</item>
+        <item>	Ramanathapuram	</item>
+        <item>	Rameswaram	</item>
+        <item>	Ramnagar	</item>
+        <item>	Rampur Jn.	</item>
+        <item>	Rampurhat	</item>
+        <item>	Ranaghat	</item>
+        <item>	Ranchi	</item>
+        <item>	Rangapara North	</item>
+        <item>	Rangiya	</item>
+        <item>	Raninagar	</item>
+        <item>	Ratangarh	</item>
+        <item>	Ratlam	</item>
+        <item>	Ratnagiri	</item>
+        <item>	Rawatganj	</item>
+        <item>	Raxaul	</item>
+        <item>	Rayagada	</item>
+        <item>	Renigunta	</item>
+        <item>	Rewa	</item>
+        <item>	Rewari	</item>
+        <item>	Ringus	</item>
+        <item>	Rohtak	</item>
+        <item>	Roorkee	</item>
+        <item>	Rourkela	</item>
+        <item>	Sadulpur	</item>
+        <item>	Sagar Jambagaru	</item>
+        <item>	Sagauli	</item>
+        <item>	Sagour	</item>
+        <item>	Saharanpur	</item>
+        <item>	Saharsa	</item>
+        <item>	Sahibganj	</item>
+        <item>	Sai Nagar Shirdi	</item>
+        <item>	Salem	</item>
+        <item>	Salempur	</item>
+        <item>	Samalkot	</item>
+        <item>	Samastipur	</item>
+        <item>	Sambalpur	</item>
+        <item>	Sambalpur City	</item>
+        <item>	Samdari	</item>
+        <item>	Samuktala Road	</item>
+        <item>	Sangli	</item>
+        <item>	Santragachi	</item>
+        <item>	Sarnath	</item>
+        <item>	Satara	</item>
+        <item>	Satna	</item>
+        <item>	Sattenapalle	</item>
+        <item>	Sawaimadhopur	</item>
+        <item>	Sawantwadi Road	</item>
+        <item>	Sealdah	</item>
+        <item>	Secunderabad	</item>
+        <item>	Sengottai	</item>
+        <item>	Sensoa	</item>
+        <item>	Sewagram	</item>
+        <item>	Shahabad	</item>
+        <item>	Shahganj	</item>
+        <item>	Shahjahanpur	</item>
+        <item>	Shahpur Patoree	</item>
+        <item>	Shaktinagar	</item>
+        <item>	Shalimar	</item>
+        <item>	Shamgarh	</item>
+        <item>	Shamli	</item>
+        <item>	Shikohabad	</item>
+        <item>	Shimla	</item>
+        <item>	Shimoga Town	</item>
+        <item>	Shivpuri	</item>
+        <item>	Shoranur Jn.	</item>
+        <item>	Shri Mahabirji	</item>
+        <item>	Sihor Gujarat	</item>
+        <item>	Sikar	</item>
+        <item>	Silchar	</item>
+        <item>	Silghat	</item>
+        <item>	Siliguri	</item>
+        <item>	Siliguri Town	</item>
+        <item>	Simaluguri	</item>
+        <item>	Singrauli	</item>
+        <item>	Sirpur Kagaznagar	</item>
+        <item>	Sirsa	</item>
+        <item>	Siswa Bazar	</item>
+        <item>	Sitamarhi	</item>
+        <item>	Sitapur City	</item>
+        <item>	Sitapur Cantt.	</item>
+        <item>	Siuri	</item>
+        <item>	Siwan	</item>
+        <item>	Sojat Road	</item>
+        <item>	Solan	</item>
+        <item>	Solapur	</item>
+        <item>	Somnath	</item>
+        <item>	Sompeta	</item>
+        <item>	Sonpur	</item>
+        <item>	Sri Chhatrapati	</item>
+        <item>	Shahu Maharaj (T)	</item>
+        <item>	Sri Dungargarh	</item>
+        <item>	Sriganga Nagar	</item>
+        <item>	Srikakulam Road	</item>
+        <item>	Sri Sathyasai Prashanti	</item>
+        <item>	Nilayam	</item>
+        <item>	Sujangarh	</item>
+        <item>	Sultanpur	</item>
+        <item>	Surat	</item>
+        <item>	Suratgarh	</item>
+        <item>	Surathkal	</item>
+        <item>	Surendra Nagar	</item>
+        <item>	Tadepalligudem	</item>
+        <item>	Tambaram	</item>
+        <item>	Tatanagar	</item>
+        <item>	Thalassery	</item>
+        <item>	Tenali	</item>
+        <item>	Tenkasi	</item>
+        <item>	Tezpur	</item>
+        <item>	Thanjavur	</item>
+        <item>	Thiruvarur.	</item>
+        <item>	Tiruchchirappalli Jn.	</item>
+        <item>	Tiruchendur	</item>
+        <item>	Tirunelveli	</item>
+        <item>	Tirupati	</item>
+        <item>	Tiruppur	</item>
+        <item>	Tirur	</item>
+        <item>	Titlagarh	</item>
+        <item>	Thrisur	</item>
+        <item>	Thiruvananthapuram	</item>
+        <item>	Tiruvannamalai	</item>
+        <item>	Tumsar Road	</item>
+        <item>	Tundla	</item>
+        <item>	Tuni	</item>
+        <item>	Tuticorin	</item>
+        <item>	Udaipur City	</item>
+        <item>	Udhampur	</item>
+        <item>	Udhna	</item>
+        <item>	Udupi	</item>
+        <item>	Ujjain	</item>
+        <item>	Una	</item>
+        <item>	Unchahar	</item>
+        <item>	Unnao	</item>
+        <item>	Vadakara	</item>
+        <item>	Vadodara	</item>
+        <item>	Valsad	</item>
+        <item>	Vanchi Maniyachchi Jn.	</item>
+        <item>	Varanasi	</item>
+        <item>	Varkala	</item>
+        <item>	Vasai Road	</item>
+        <item>	Vasco-Da-Gama	</item>
+        <item>	Velankanni	</item>
+        <item>	Veraval	</item>
+        <item>	Vidisha	</item>
+        <item>	Vijayawada	</item>
+        <item>	Villupuram Jn.	</item>
+        <item>	Viramgam	</item>
+        <item>	Virudunagar Jn.	</item>
+        <item>	Visakhapatnam	</item>
+        <item>	Vizianagaram	</item>
+        <item>	Vriddhachalam Jn.	</item>
+        <item>	Wadi	</item>
+        <item>	Wankaner	</item>
+        <item>	Warangal	</item>
+        <item>	Wardha Jn.	</item>
+        <item>	Yesvantpur	</item>
+        <item>	Zafarabad	</item>
+    </string-array>
 
 
 </resources>

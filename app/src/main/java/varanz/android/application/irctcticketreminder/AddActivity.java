@@ -28,6 +28,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -75,8 +77,8 @@ public class AddActivity extends AppCompatActivity {
      */
     private Button datePickerButton;
     private EditText ticketDescription;
-    private EditText fromStation;
-    private EditText toStation;
+    private AutoCompleteTextView fromStation;
+    private AutoCompleteTextView toStation;
     private Button timePickerButton;
     private RadioGroup alarmRadioGroup;
     private MaterialCardView materialCardView;
@@ -106,6 +108,14 @@ public class AddActivity extends AppCompatActivity {
                 .allowMainThreadQueries().build();
 
         insertEmptyData();
+
+        String[] stationList = getResources().getStringArray(R.array.stationList);
+        ArrayAdapter<String> fromStationAdapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stationList);
+        ArrayAdapter<String> toStationAdapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stationList);
+        fromStation.setAdapter(fromStationAdapter);
+        toStation.setAdapter(toStationAdapter);
     }
 
     @Override
@@ -424,7 +434,7 @@ public class AddActivity extends AppCompatActivity {
         alarmIntent.putExtra("fromStation", fromStation.getText().toString());
         alarmIntent.putExtra("toStation", toStation.getText().toString());
         alarmIntent.putExtra("ticketId", ticketId);
-        alarmIntent.putExtra("journeyDate", (sDate+"/"+sMonth+"/"+sYear));
+        alarmIntent.putExtra("journeyDate", (sDate + "/" + sMonth + "/" + sYear));
 
         PendingIntent pendingAlarmIntent =
                 PendingIntent.getBroadcast(getApplicationContext(), ticketId, alarmIntent, 0);

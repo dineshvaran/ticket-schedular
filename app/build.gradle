@@ -7,8 +7,8 @@ android {
         applicationId "varanz.android.application.irctcticketreminder"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 5
-        versionName "Added changes in notification view."
+        versionCode 6
+        versionName "UI changes."
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

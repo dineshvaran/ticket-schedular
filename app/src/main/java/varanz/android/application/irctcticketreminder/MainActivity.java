@@ -1,9 +1,7 @@
 package varanz.android.application.irctcticketreminder;
 
 import varanz.android.application.irctcticketreminder.adapter.RecyclerViewAdapter;
-import varanz.android.application.irctcticketreminder.bean.TicketDetail;
 
-import varanz.android.application.irctcticketreminder.R;
 import varanz.android.application.irctcticketreminder.store.TicketSchedularDataBase;
 import varanz.android.application.irctcticketreminder.store.TicketSchedularEntity;
 
@@ -20,10 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {

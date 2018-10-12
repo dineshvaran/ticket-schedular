@@ -1,11 +1,11 @@
 package varanz.android.application.irctcticketreminder.adapter;
 
+import varanz.android.application.irctcticketreminder.DetailActivity;
 import varanz.android.application.irctcticketreminder.R;
-import varanz.android.application.irctcticketreminder.bean.TicketDetail;
 import varanz.android.application.irctcticketreminder.store.TicketSchedularEntity;
 
 import android.content.Context;
-import android.content.res.Resources;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -15,10 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -71,21 +68,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         viewHolder.bookingText.setText(fBookingDate);
         viewHolder.journeyText.setText(fJourneyDate);
-        viewHolder.ticketId.setText(ticket.getTicketId());
+        viewHolder.ticketId.setText(String.valueOf(ticket.getTicketId()));
         if(ticket.getReminderType().equals(context.getString(R.string.alarm_radio_item))){
             viewHolder.reminderType.setImageDrawable(context.getDrawable(R.drawable.ic_alarm_black_24dp));
         }else{
             viewHolder.reminderType.setImageDrawable(context.getDrawable(R.drawable.ic_event_black_24dp));
         }
 
-
-
-//        viewHolder.view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        viewHolder.rowView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView ticketId = v.findViewById(R.id.hidden_ticket_id);
+                String uniqueTicketId = ticketId.getText().toString();
+                Intent detailIntent = new Intent(context, DetailActivity.class);
+                detailIntent.putExtra("ticketId", Integer.valueOf(uniqueTicketId));
+                context.startActivity(detailIntent);
+            }
+        });
     }
 
     @Override
@@ -95,7 +94,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private View view;
+        private View rowView;
         private TextView tripDescription;
         private TextView bookingText;
         private TextView journeyText;
@@ -104,7 +103,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public ViewHolder(View view){
             super(view);
-            view = view;
+            rowView = view;
             tripDescription = view.findViewById(R.id.ticket_description);
             bookingText = view.findViewById(R.id.booking_date_text);
             journeyText=view.findViewById(R.id.journey_date_text);

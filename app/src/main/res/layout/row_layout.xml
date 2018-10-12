@@ -13,6 +13,7 @@
         android:id="@+id/hidden_ticket_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="number"
         android:visibility="gone"/>
 
     <TextView

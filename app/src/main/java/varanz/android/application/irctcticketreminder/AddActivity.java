@@ -101,6 +101,13 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        afterOnCreate();
+    }
+
+    /**
+     * gets called after onCreate method
+     */
+    private void afterOnCreate(){
         initializeViewObjects();
         addListeners();
         database = Room.databaseBuilder(getApplicationContext(),
@@ -108,7 +115,13 @@ public class AddActivity extends AppCompatActivity {
                 .allowMainThreadQueries().build();
 
         insertEmptyData();
+        setStationList();
+    }
 
+    /**
+     * add station for auto complete feature.
+     */
+    private void setStationList(){
         String[] stationList = getResources().getStringArray(R.array.stationList);
         ArrayAdapter<String> fromStationAdapter =
                 new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stationList);

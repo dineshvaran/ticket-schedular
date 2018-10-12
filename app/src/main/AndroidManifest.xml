@@ -38,15 +38,24 @@
 
         <!--activities-->
         <activity android:name="varanz.android.application.irctcticketreminder.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <activity
             android:name="varanz.android.application.irctcticketreminder.AddActivity"
             android:label="@string/app_add_activity"></activity>
+
+        <activity android:name=".DetailActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
 
     </application>
 

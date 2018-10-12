@@ -6,4 +6,7 @@
 
     <color name="mainActivityBackground">#e1dede</color>
     <color name="rowBackground">#f9f7f7</color>
+
+    <!-- detail activity -->
+    <color name="iconTint">#04a08c</color>
 </resources>

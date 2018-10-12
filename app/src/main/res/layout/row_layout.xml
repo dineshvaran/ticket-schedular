@@ -10,6 +10,12 @@
     android:paddingVertical="8sp">
 
     <TextView
+        android:id="@+id/hidden_ticket_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <TextView
         android:id="@+id/ticket_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

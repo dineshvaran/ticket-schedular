@@ -71,6 +71,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         viewHolder.bookingText.setText(fBookingDate);
         viewHolder.journeyText.setText(fJourneyDate);
+        viewHolder.ticketId.setText(ticket.getTicketId());
         if(ticket.getReminderType().equals(context.getString(R.string.alarm_radio_item))){
             viewHolder.reminderType.setImageDrawable(context.getDrawable(R.drawable.ic_alarm_black_24dp));
         }else{
@@ -99,6 +100,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private TextView bookingText;
         private TextView journeyText;
         private ImageView reminderType;
+        private TextView ticketId;
 
         public ViewHolder(View view){
             super(view);
@@ -107,6 +109,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             bookingText = view.findViewById(R.id.booking_date_text);
             journeyText=view.findViewById(R.id.journey_date_text);
             reminderType=view.findViewById(R.id.reminder_type);
+            ticketId=view.findViewById(R.id.hidden_ticket_id);
         }
     }
 }

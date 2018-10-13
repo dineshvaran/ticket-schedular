@@ -5,7 +5,9 @@ import varanz.android.application.irctcticketreminder.adapter.RecyclerViewAdapte
 import varanz.android.application.irctcticketreminder.store.TicketSchedularDataBase;
 import varanz.android.application.irctcticketreminder.store.TicketSchedularEntity;
 
+import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Room;
+import android.arch.persistence.room.migration.Migration;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -33,6 +35,19 @@ public class MainActivity extends AppCompatActivity {
      */
     FloatingActionButton fab;
 
+    /**
+     * Migration of database from version 1 to 2
+     */
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE TicketSchedularEntity "
+                    +"ADD COLUMN reminderHour INTEGER NOT NULL DEFAULT -1");
+            database.execSQL("ALTER TABLE TicketSchedularEntity "
+                    +"ADD COLUMN reminderMinute INTEGER NOT NULL DEFAULT -1");
+        }
+    };
+
 
 
     @Override
@@ -45,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         database = Room.databaseBuilder(getApplicationContext(),
                 TicketSchedularDataBase.class, TicketSchedularEntity.class.getSimpleName())
+                .addMigrations(MIGRATION_1_2)
                 .allowMainThreadQueries().build();
 
     }

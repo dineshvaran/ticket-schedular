@@ -235,6 +235,8 @@ public class AddActivity extends AppCompatActivity {
         entity.setReminderType(reminderType);
         entity.setJourneyDate(journey);
         entity.setBookingDate(booking);
+        entity.setReminderHour(sHour);
+        entity.setReminderMinute(sMinute);
 
         database.getTicketSchedularDao().updateTicketDetail(entity);
         isRecordSaved = true;

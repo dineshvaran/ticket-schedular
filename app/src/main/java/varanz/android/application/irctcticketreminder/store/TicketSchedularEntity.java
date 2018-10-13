@@ -14,7 +14,6 @@ public class TicketSchedularEntity {
 
     private String ticetDescription;
 
-
     private Calendar journeyDate;
 
     private Calendar bookingDate;
@@ -25,12 +24,17 @@ public class TicketSchedularEntity {
 
     private String toStation;
 
-    @NonNull
+    private int reminderHour;
+
+    private int reminderMinute;
+
+    // Getters and Setters for the field
+
     public int getTicketId() {
         return ticketId;
     }
 
-    public void setTicketId(@NonNull int ticketId) {
+    public void setTicketId(int ticketId) {
         this.ticketId = ticketId;
     }
 
@@ -80,5 +84,21 @@ public class TicketSchedularEntity {
 
     public void setToStation(String toStation) {
         this.toStation = toStation;
+    }
+
+    public int getReminderHour() {
+        return reminderHour;
+    }
+
+    public void setReminderHour(int reminderHour) {
+        this.reminderHour = reminderHour;
+    }
+
+    public int getReminderMinute() {
+        return reminderMinute;
+    }
+
+    public void setReminderMinute(int reminderMinute) {
+        this.reminderMinute = reminderMinute;
     }
 }

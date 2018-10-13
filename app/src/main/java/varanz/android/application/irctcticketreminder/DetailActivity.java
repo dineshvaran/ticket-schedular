@@ -4,9 +4,15 @@ import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import varanz.android.application.irctcticketreminder.store.TicketSchedularDataBase;
 import varanz.android.application.irctcticketreminder.store.TicketSchedularEntity;
@@ -14,15 +20,24 @@ import varanz.android.application.irctcticketreminder.store.TicketSchedularEntit
 public class DetailActivity extends AppCompatActivity {
 
     /**
+     * Views in detail
+     */
+    TextView ticketDescription;
+    TextView fromStation;
+    TextView toStation;
+    TextView journeyDate;
+    TextView reminderDate;
+    TextView reminderTime;
+
+    /**
      * used for CRUD operation
      */
     TicketSchedularDataBase database;
 
     /**
-     *
      * ticket Id
      */
-    int ticketId=-1;
+    int ticketId = -1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,23 +46,75 @@ public class DetailActivity extends AppCompatActivity {
         afterOnCreate();
     }
 
-    private void afterOnCreate(){
+    /**
+     * initializes and set data during activity creation.
+     */
+    private void afterOnCreate() {
         database = Room.databaseBuilder(getApplicationContext(),
                 TicketSchedularDataBase.class, TicketSchedularEntity.class.getSimpleName())
                 .allowMainThreadQueries().build();
-        ticketId=getIntent().getIntExtra("ticketId",-1);
+        ticketId = getIntent().getIntExtra("ticketId", -1);
+        initialize();
+        setData();
     }
 
-    private void initialize(){
-        
+    /**
+     * initializes views in detail activity
+     */
+    private void initialize() {
+        ticketDescription = findViewById(R.id.ticket_description);
+        fromStation = findViewById(R.id.from_station);
+        toStation = findViewById(R.id.to_station);
+        journeyDate = findViewById(R.id.journey_date);
+        reminderDate = findViewById(R.id.reminder_date);
+        reminderTime = findViewById(R.id.reminder_time);
     }
 
-    private TicketSchedularEntity getData(int ticketId){
+    /**
+     * gets information from db for the given ticket id.
+     *
+     * @param ticketId ticketId
+     * @return TicketSchedularEntity
+     */
+    private TicketSchedularEntity getTicketDetails(int ticketId) {
         return database.getTicketSchedularDao().getTicketDetail(ticketId);
     }
 
-    private void fillData(){
-        TicketSchedularEntity entity = getData(ticketId);
+    /**
+     * sets data to views
+     */
+    private void setData() {
+        TicketSchedularEntity entity = getTicketDetails(ticketId);
+        ticketDescription.setText(entity.getTicetDescription());
+        fromStation.setText(entity.getFromStation());
+        toStation.setText(entity.getToStation());
+        journeyDate.setText(formatDate(entity.getJourneyDate().getTime()));
+        reminderDate.setText(formatDate(entity.getBookingDate().getTime()));
+        reminderTime.setText(String.format(Locale.ENGLISH, "%1$02d : %2$02d", entity.getReminderHour(), entity.getReminderMinute()));
+    }
+
+    /**
+     * formats the given date in the given format
+     *
+     * @param date   Date
+     * @param format string
+     * @return string
+     */
+    private String formatDate(Date date, @Nullable String format) {
+        if (TextUtils.isEmpty(format)) {
+            format = "MMM dd, yyyy";
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
+        return dateFormat.format(date);
+    }
+
+    /**
+     * overloaded method for formatDate(date, format), use this method for optional format.
+     * @param date Date
+     * @return String
+     */
+    private String formatDate(Date date){
+        return formatDate(date,null);
     }
 
     @Override

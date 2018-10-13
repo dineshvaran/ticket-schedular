@@ -1,8 +1,15 @@
 package varanz.android.application.irctcticketreminder;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.arch.persistence.room.Room;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -14,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import varanz.android.application.irctcticketreminder.receiver.AlarmReceiver;
 import varanz.android.application.irctcticketreminder.store.TicketSchedularDataBase;
 import varanz.android.application.irctcticketreminder.store.TicketSchedularEntity;
 
@@ -120,12 +128,33 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.detial_actionbar_menu, menu);
+        inflater.inflate(R.menu.detail_actionbar_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case (R.id.action_delete):
+                new AlertDialog.Builder(this)
+                        .setIcon(R.drawable.ic_delete_red_24dp)
+                        .setTitle("Confirm Delete")
+                        .setMessage("Reminder will be deleted permanently.")
+                        .setNegativeButton(android.R.string.no, null)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(AddActivity.ALARM_SERVICE);
+                                Intent alarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                                PendingIntent pendingAlarmIntent =
+                                        PendingIntent.getBroadcast(getApplicationContext(), ticketId, alarmIntent, 0);
+                                alarmManager.cancel(pendingAlarmIntent);
+                                database.getTicketSchedularDao().deleteTicketDetailByTicketId(ticketId);
+                                finish();
+                            }
+                        })
+                        .show();
+        }
         return super.onOptionsItemSelected(item);
     }
 }

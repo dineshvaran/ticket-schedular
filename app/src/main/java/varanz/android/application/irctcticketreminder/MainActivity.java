@@ -20,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -97,11 +98,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         if(ticketList.size()==0){
-            ImageView emptyView = findViewById(R.id.empty_message);
+            TextView emptyView = findViewById(R.id.empty_message);
             recyclerView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
         }else{
-            ImageView emptyView = findViewById(R.id.empty_message);
+            TextView emptyView = findViewById(R.id.empty_message);
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
         }

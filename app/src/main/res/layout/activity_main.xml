@@ -16,25 +16,28 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
         android:src="@drawable/ic_add_white_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
+    <TextView
         android:id="@+id/empty_message"
-        android:layout_width="280sp"
-        android:layout_height="130sp"
-        android:layout_marginTop="200sp"
-        android:background="@drawable/no_record"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
         android:gravity="center_vertical"
-        android:textSize="30sp"
+        android:text="Once you added a reminder. You'll see the reminders here"
+        android:textAlignment="center"
+        android:textSize="15sp"
         android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-        <!--android:text="@string/empty_message"-->
 
 
 </android.support.constraint.ConstraintLayout>

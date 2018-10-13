@@ -1,5 +1,5 @@
 <resources>
-    <string name="application_name">Ticket Schedular</string>
+    <string name="application_name">IRCTC Booking Reminder</string>
     <string name="app_add_activity">Add Reminder</string>
 
 

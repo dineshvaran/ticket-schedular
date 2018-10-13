@@ -7,8 +7,8 @@ android {
         applicationId "varanz.android.application.irctcticketreminder"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 7
-        versionName "Auto complete added for station list."
+        versionCode 9
+        versionName "Notifiction issue fix"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

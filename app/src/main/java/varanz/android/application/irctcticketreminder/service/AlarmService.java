@@ -20,6 +20,7 @@ import android.util.Log;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import varanz.android.application.irctcticketreminder.DetailActivity;
 import varanz.android.application.irctcticketreminder.MainActivity;
 import varanz.android.application.irctcticketreminder.R;
 import varanz.android.application.irctcticketreminder.receiver.DismissAlarmReceiver;
@@ -95,7 +96,8 @@ public class AlarmService extends Service {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 321,
                 dismissAlarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-        Intent notificationDetailIntent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent notificationDetailIntent = new Intent(getApplicationContext(), DetailActivity.class);
+        notificationDetailIntent.putExtra("ticketId", ticketId);
         PendingIntent notificationDetailPendingIntent =
                 PendingIntent.getActivity(getApplicationContext(), ticketId,
                         notificationDetailIntent, PendingIntent.FLAG_UPDATE_CURRENT);

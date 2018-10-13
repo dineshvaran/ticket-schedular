@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -55,7 +58,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        afterOnCreate();
+    }
 
+    /**
+     * initializes the values on activity start.
+     */
+    private void afterOnCreate(){
         initialize();
         addListenerToViews();
 
@@ -63,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 TicketSchedularDataBase.class, TicketSchedularEntity.class.getSimpleName())
                 .addMigrations(MIGRATION_1_2)
                 .allowMainThreadQueries().build();
-
     }
 
     /**
@@ -127,6 +135,26 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case (R.id.action_announcement):
+                showAnnouncement();
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * shows todays booking announcement
+     */
+    private void showAnnouncement(){
+        Calendar today=Calendar.getInstance();
+        today.add(Calendar.DAY_OF_MONTH, 120);
+        String formattedDate = new SimpleDateFormat("MMM dd, yyyy").format(today.getTime());
+        new AlertDialog.Builder(this)
+                .setIcon(R.drawable.ic_announcement_blue_24dp)
+                .setTitle("Announcement")
+                .setPositiveButton(android.R.string.yes,null)
+                .setMessage(String.format("Today booking opens for %1$s", formattedDate))
+                .show();
     }
 }

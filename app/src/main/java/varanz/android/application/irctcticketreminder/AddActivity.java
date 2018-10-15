@@ -449,7 +449,9 @@ public class AddActivity extends AppCompatActivity {
         alarmIntent.putExtra("fromStation", fromStation.getText().toString());
         alarmIntent.putExtra("toStation", toStation.getText().toString());
         alarmIntent.putExtra("ticketId", ticketId);
-        alarmIntent.putExtra("journeyDate", (sDate + "/" + sMonth + "/" + sYear));
+        alarmIntent.putExtra("journeyDay", sDate);
+        alarmIntent.putExtra("journeyMonth", sMonth);
+        alarmIntent.putExtra("journeyYear", sYear);
 
         PendingIntent pendingAlarmIntent =
                 PendingIntent.getBroadcast(getApplicationContext(), ticketId, alarmIntent, 0);
@@ -502,7 +504,7 @@ public class AddActivity extends AppCompatActivity {
             sMonth = month;
             sYear = year;
             SimpleDateFormat format = new SimpleDateFormat("EEEE", Locale.US);
-            SimpleDateFormat formatB = new SimpleDateFormat("dd MMMM yyyy", Locale.US);
+            SimpleDateFormat formatB = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);
             // calculating booking date
             Calendar calendar = Calendar.getInstance();
             calendar.set(year, month, day);

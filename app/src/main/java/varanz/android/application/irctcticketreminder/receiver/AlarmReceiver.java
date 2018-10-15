@@ -49,7 +49,9 @@ public class AlarmReceiver extends BroadcastReceiver {
         intent.putExtra("fromStation", pIntent.getStringExtra("fromStation"));
         intent.putExtra("toStation", pIntent.getStringExtra("toStation"));
         intent.putExtra("ticketDescription", pIntent.getStringExtra("ticketDescription"));
-        intent.putExtra("journeyDate", pIntent.getStringExtra("journeyDate"));
+        intent.putExtra("journeyDay", pIntent.getIntExtra("journeyDay",-1));
+        intent.putExtra("journeyMonth", pIntent.getIntExtra("journeyMonth",-1));
+        intent.putExtra("journeyYear", pIntent.getIntExtra("journeyYear",-1));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(intent);

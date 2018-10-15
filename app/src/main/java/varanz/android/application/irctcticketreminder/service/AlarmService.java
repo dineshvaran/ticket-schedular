@@ -19,6 +19,9 @@ import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import varanz.android.application.irctcticketreminder.DetailActivity;
 import varanz.android.application.irctcticketreminder.MainActivity;
@@ -70,14 +73,12 @@ public class AlarmService extends Service {
         String notificationTitle = "Reminder to Book Ticket";
         String fromStation = intent.getStringExtra("fromStation");
         String toStation = intent.getStringExtra("toStation");
-        String journeyDate = intent.getStringExtra("journeyDate");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy");
-        try {
-            journeyDate = dateFormat.format(new SimpleDateFormat("dd/MM/yyyy")
-                    .parse(intent.getStringExtra("journeyDate")));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Calendar jCalendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);
+        jCalendar.set(intent.getIntExtra("journeyYear", -1),
+                intent.getIntExtra("journeyMonth", -1),
+                intent.getIntExtra("journeyDay", -1));
+        String journeyDate = dateFormat.format(jCalendar.getTime());
         int ticketId = intent.getIntExtra("ticketId", -1);
         CharSequence channelName = getApplicationContext().getString(R.string.channelNameHigh);
 
@@ -106,7 +107,7 @@ public class AlarmService extends Service {
                 .setSmallIcon(R.drawable.ic_train)
                 .setContentTitle(notificationTitle)
                 .setColor(Color.RED)
-                .setContentText("Journey date is " + journeyDate)
+                .setContentText("Journey on " + journeyDate)
                 .setAutoCancel(true)
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -115,7 +116,7 @@ public class AlarmService extends Service {
                 .setOngoing(true)
                 .setContentIntent(notificationDetailPendingIntent)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(
-                        Html.fromHtml("<big>Journey date is "+journeyDate+"</big><br>"
+                        Html.fromHtml("<big>Journey on " + journeyDate + "</big><br>"
                                 + intent.getStringExtra("ticketDescription"))))
                 .setWhen(System.currentTimeMillis());
 

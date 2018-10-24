@@ -7,8 +7,8 @@ android {
         applicationId "varanz.android.application.irctcticketreminder"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 9
-        versionName "Notifiction issue fix"
+        versionCode 10
+        versionName "Notifiction date issue fix"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -36,6 +36,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView journeyDate;
     TextView reminderDate;
     TextView reminderTime;
+    TextView ticketType;
 
     /**
      * used for CRUD operation
@@ -76,6 +77,7 @@ public class DetailActivity extends AppCompatActivity {
         journeyDate = findViewById(R.id.journey_date);
         reminderDate = findViewById(R.id.reminder_date);
         reminderTime = findViewById(R.id.reminder_time);
+        ticketType=findViewById(R.id.ticket_type);
     }
 
     /**
@@ -99,6 +101,7 @@ public class DetailActivity extends AppCompatActivity {
         journeyDate.setText(formatDate(entity.getJourneyDate().getTime()));
         reminderDate.setText(formatDate(entity.getBookingDate().getTime()));
         reminderTime.setText(String.format(Locale.ENGLISH, "%1$02d : %2$02d", entity.getReminderHour(), entity.getReminderMinute()));
+        ticketType.setText(entity.getReminderType());
     }
 
     /**

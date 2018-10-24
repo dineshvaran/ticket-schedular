@@ -68,16 +68,16 @@
         android:text="@string/journeyDate"
         app:layout_constraintEnd_toStartOf="@+id/time_picker_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alarm_type" />
+        app:layout_constraintTop_toBottomOf="@+id/ticket_type" />
 
 
     <TextView
-        android:id="@+id/select_alarm_type_text"
+        android:id="@+id/select_ticket_type_text"
         android:layout_width="0dp"
         android:layout_height="39dp"
         android:layout_marginTop="8dp"
         android:gravity="bottom"
-        android:text="@string/select_alarm_type_text"
+        android:text="@string/select_ticket_type_text"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textStyle="bold"
@@ -92,31 +92,31 @@
         android:layout_marginTop="10dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/select_alarm_type_text" />
+        app:layout_constraintTop_toBottomOf="@+id/select_ticket_type_text" />
 
     <RadioGroup
-        android:id="@+id/alarm_type"
+        android:id="@+id/ticket_type"
         android:layout_width="376dp"
         android:layout_height="38dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:checkedButton="@id/alarm_radio_button"
+        android:checkedButton="@id/type_general"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/select_alarm_type_text">
+        app:layout_constraintTop_toBottomOf="@+id/select_ticket_type_text">
 
         <RadioButton
-            android:id="@+id/alarm_radio_button"
+            android:id="@+id/type_general"
             android:layout_width="101dp"
             android:layout_height="wrap_content"
-            android:text="@string/alarm_radio_item" />
+            android:text="@string/radio_item_general" />
 
         <RadioButton
-            android:id="@+id/add_to_calendar_radio_button"
+            android:id="@+id/type_takkal"
             android:layout_width="243dp"
             android:layout_height="match_parent"
             android:checked="false"
-            android:text="@string/add_to_calendar_item" />
+            android:text="@string/radio_item_takkal" />
     </RadioGroup>
 
     <Button

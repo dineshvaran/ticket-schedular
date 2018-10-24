@@ -1,6 +1,5 @@
 package varanz.android.application.irctcticketreminder;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
@@ -8,8 +7,6 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.arch.persistence.room.Room;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -17,8 +14,6 @@ import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.design.card.MaterialCardView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
@@ -42,7 +37,6 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.TimeZone;
 
 import varanz.android.application.irctcticketreminder.receiver.AlarmReceiver;
 import varanz.android.application.irctcticketreminder.store.TicketSchedularDataBase;
@@ -80,7 +74,7 @@ public class AddActivity extends AppCompatActivity {
     private AutoCompleteTextView fromStation;
     private AutoCompleteTextView toStation;
     private Button timePickerButton;
-    private RadioGroup alarmRadioGroup;
+    private RadioGroup ticketTypeRadioGroup;
     private MaterialCardView materialCardView;
     private TextView bookingDateText;
 
@@ -141,85 +135,28 @@ public class AddActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (validateInputs() && validateSelectedDate() && validateBookingDate() && validateSelectedTime()) {
-            int radioItemId = alarmRadioGroup.getCheckedRadioButtonId();
+            int radioItemId = ticketTypeRadioGroup.getCheckedRadioButtonId();
             RadioButton radioItem = findViewById(radioItemId);
-            if (radioItem.getText().toString().equals(getString(R.string.alarm_radio_item))) {
-                saveData(getString(R.string.alarm_radio_item));
-                setAlarm(alarmTime);
-                Toast.makeText(this, getString(R.string.toast_success_message), Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                checkCalendarPermisson();
+            if (radioItemId == R.id.type_general) {
+                saveData(getString(R.string.radio_item_general));
+            } else if (radioItemId == R.id.type_takkal) {
+                saveData(getString(R.string.radio_item_takkal));
+            }else{
+                // TODO need to add custom
             }
+            setAlarm(alarmTime);
+            Toast.makeText(this, getString(R.string.toast_success_message), Toast.LENGTH_SHORT).show();
+            finish();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void checkCalendarPermisson() {
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_GRANTED) {
-        pushEventToCalender();
-//        } else {
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_CALENDAR}, CALENDAR_PERMISSON);
-//        }
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case CALENDAR_PERMISSON:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    pushEventToCalender();
-                } else {
-                    Toast.makeText(this, "Give Calendar Permission to Add Reminder", Toast.LENGTH_LONG).show();
-                }
-        }
-    }
-
-    /**
-     * Add event to calendar.
-     */
-    @SuppressLint("MissingPermission")
-    public void pushEventToCalender() {
-        Calendar beginTime = Calendar.getInstance();
-        Calendar endTime = Calendar.getInstance();
-        beginTime.set(bYear, bMonth, bDate, sHour, sMinute);
-        endTime.set(bYear, bMonth, bDate, sHour, (sMinute + 30));
-
-        saveData(getString(R.string.add_to_calendar_item_value));
-
-        Intent intent = new Intent(Intent.ACTION_INSERT)
-                .setData(CalendarContract.Events.CONTENT_URI)
-                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
-                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                .putExtra(CalendarContract.Events.TITLE, "Book IRCTC Ticket for " + ticketDescription.getText())
-                .putExtra(CalendarContract.Events.DESCRIPTION, "Ticket from " + fromStation.getText().toString()
-                        + " to " + toStation.getText().toString())
-                .putExtra(CalendarContract.Events.EVENT_LOCATION, "www.irctc.co.in");
-        startActivity(intent);
-
-//        ContentResolver contentResolver = getContentResolver();
-//        ContentValues values = new ContentValues();
-//        values.put(CalendarContract.Events.CALENDAR_ID, 1);
-//        values.put(CalendarContract.Events.TITLE, "Book IRCTC Ticket for " + ticketDescription.getText());
-//        values.put(CalendarContract.Events.DESCRIPTION,
-//                "Ticket from " + fromStation.getText().toString() + " to " + toStation.getText().toString());
-//        values.put(CalendarContract.Events.EVENT_LOCATION, "www.irctc.co.in");
-//        values.put(CalendarContract.Events.DTSTART, beginTime.getTimeInMillis());
-//        values.put(CalendarContract.Events.DTEND, endTime.getTimeInMillis());
-//        values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
-//        contentResolver.insert(CalendarContract.Events.CONTENT_URI, values);
-//        eventId = Long.parseLong(uri.getLastPathSegment());
-//        Toast.makeText(this, "Event added to Calendar", Toast.LENGTH_LONG).show();
     }
 
     /**
      * Updates the empty ticket in Database
      *
-     * @param reminderType enum ReminderType
+     * @param ticketType enum ReminderType
      */
-    private void saveData(String reminderType) {
+    private void saveData(String ticketType) {
 
         Calendar journey = Calendar.getInstance();
         journey.set(sYear, sMonth, sDate);
@@ -232,7 +169,7 @@ public class AddActivity extends AppCompatActivity {
         entity.setTicetDescription(ticketDescription.getText().toString());
         entity.setFromStation(fromStation.getText().toString());
         entity.setToStation(toStation.getText().toString());
-        entity.setReminderType(reminderType);
+        entity.setReminderType(ticketType);
         entity.setJourneyDate(journey);
         entity.setBookingDate(booking);
         entity.setReminderHour(sHour);
@@ -296,7 +233,7 @@ public class AddActivity extends AppCompatActivity {
         fromStation = findViewById(R.id.from_station);
         toStation = findViewById(R.id.to_station);
         timePickerButton = findViewById(R.id.time_picker_button);
-        alarmRadioGroup = findViewById(R.id.alarm_type);
+        ticketTypeRadioGroup = findViewById(R.id.ticket_type);
         materialCardView = findViewById(R.id.material_card_view);
         bookingDateText = findViewById(R.id.booking_date_text);
     }
@@ -425,9 +362,6 @@ public class AddActivity extends AppCompatActivity {
     private long getReminderinMillis(int date, int month, int year, int hour, int minute) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, date, hour, minute, 0);
-        Log.i(className, "Millis to date is " + calendar.getTime().toString());
-        Log.i(className, "millis is " + calendar.getTimeInMillis());
-        Log.i(className, "system millis is " + System.currentTimeMillis());
         return calendar.getTimeInMillis();
     }
 
@@ -499,17 +433,27 @@ public class AddActivity extends AppCompatActivity {
 
         @Override
         public void onDateSet(DatePicker view, int year, int month, int day) {
+
             // updating journey date
             sDate = day;
             sMonth = month;
             sYear = year;
             SimpleDateFormat format = new SimpleDateFormat("EEEE", Locale.US);
             SimpleDateFormat formatB = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);
+            int ticketType=ticketTypeRadioGroup.getCheckedRadioButtonId();
+
             // calculating booking date
             Calendar calendar = Calendar.getInstance();
             calendar.set(year, month, day);
             String weekDay = format.format(calendar.getTime());
-            calendar.add(Calendar.DATE, -120);
+
+            // calculated based on ticket type
+            if(R.id.type_general==ticketType){
+                calendar.add(Calendar.DATE, -120);
+            }else{
+                calendar.add(Calendar.DATE, -1);
+            }
+
             // updating booking date
             bDate = calendar.get(Calendar.DATE);
             bMonth = calendar.get(Calendar.MONTH);

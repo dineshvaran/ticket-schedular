@@ -17,13 +17,13 @@
     <string name="from_station">From</string>
     <string name="to_station">To</string>
 
-    <string name="alarm_radio_item">Alarm</string>
-    <string name="add_to_calendar_item">Add to Calendar</string>
+    <string name="radio_item_general">General</string>
+    <string name="radio_item_takkal">Takkal</string>
     <string name="add_to_calendar_item_value">Calendar</string>
 
     <string name="alarm_button">Select Time</string>
     <string name="add_to_google_calendar_button">Add to Calendar</string>
-    <string name="select_alarm_type_text">Select Reminder Type</string>
+    <string name="select_ticket_type_text">Ticket Type</string>
     <string name="journeyDate">Journey Date</string>
     <string name="time">Time</string>
     <string name="selectedDateFormat">%1$d / %2$d / %3$d %4$s</string>

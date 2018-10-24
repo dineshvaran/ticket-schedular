@@ -69,10 +69,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         viewHolder.bookingText.setText(fBookingDate);
         viewHolder.journeyText.setText(fJourneyDate);
         viewHolder.ticketId.setText(String.valueOf(ticket.getTicketId()));
-        if(ticket.getReminderType().equals(context.getString(R.string.alarm_radio_item))){
-            viewHolder.reminderType.setImageDrawable(context.getDrawable(R.drawable.ic_alarm_black_24dp));
+        if(ticket.getReminderType().equals(context.getString(R.string.radio_item_general))){
+            viewHolder.reminderType.setImageDrawable(context.getDrawable(R.drawable.ic_general_black_24dp));
+        }else if(ticket.getReminderType().equals(context.getString(R.string.radio_item_takkal))){
+            viewHolder.reminderType.setImageDrawable(context.getDrawable(R.drawable.ic_takkal_black_24dp));
         }else{
-            viewHolder.reminderType.setImageDrawable(context.getDrawable(R.drawable.ic_event_black_24dp));
+            // TODO need to add custom
         }
 
         viewHolder.rowView.setOnClickListener(new View.OnClickListener() {

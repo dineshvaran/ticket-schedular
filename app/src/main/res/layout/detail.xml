@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/detail_constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,12 +9,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:textColor="@color/colorPrimaryDark"
         android:id="@+id/header_ticket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Journey"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,7 +51,7 @@
         android:layout_width="18sp"
         android:layout_height="18sp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:tint="@color/iconTint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/from_station"
@@ -100,7 +102,7 @@
         android:id="@+id/journey_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -118,8 +120,30 @@
         android:text="Reminder"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+    <ImageView
+        android:id="@+id/ticket_type_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:tint="@color/iconTint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ticket_type"
+        app:srcCompat="@drawable/ic_train" />
+
+    <TextView
+        android:id="@+id/ticket_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:text="General"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/ticket_type_icon"
+        app:layout_constraintTop_toBottomOf="@+id/header_reminder" />
 
     <ImageView
         android:id="@+id/reminder_date_icon"
@@ -136,14 +160,14 @@
         android:id="@+id/reminder_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Aug 12, 2018"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/reminder_date_icon"
-        app:layout_constraintTop_toBottomOf="@+id/header_reminder" />
+        app:layout_constraintTop_toBottomOf="@+id/divider8" />
 
     <ImageView
         android:id="@+id/reminder_time_icon"
@@ -195,7 +219,7 @@
         android:layout_marginTop="8dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/journey_date"
         app:layout_constraintTop_toBottomOf="@+id/journey_date" />
 
     <View
@@ -212,11 +236,10 @@
         android:id="@+id/divider6"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginStart="1dp"
         android:layout_marginTop="8dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/reminder_time"
         app:layout_constraintTop_toBottomOf="@+id/reminder_time" />
 
     <View
@@ -251,5 +274,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView7"
         app:layout_constraintTop_toTopOf="@+id/divider7" />
+
+    <View
+        android:id="@+id/divider8"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ticket_type"
+        app:layout_constraintTop_toBottomOf="@+id/ticket_type" />
 
 </android.support.constraint.ConstraintLayout>
